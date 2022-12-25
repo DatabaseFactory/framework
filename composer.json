@@ -1,0 +1,27 @@
+{
+  "name": "jason-napolitano/project-template",
+  "type": "library",
+  "description": "A simple template for a PHP repository. Built for PHP 8.1 using Composer, Travis-CI, PSR-4 and PHPUnit 9!",
+  "homepage": "https://github.com/jason-napolitano/Project-Template",
+  "license": "MIT",
+  "version": "0.0.1",
+  "require": {
+    "php": "^8.1"
+  },
+  "require-dev": {
+      "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "NamespaceName\\": "./src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "./tests"
+    }
+  },
+  "scripts": {
+      "test": "vendor/bin/phpunit ./tests --testdox"
+  }
+}
