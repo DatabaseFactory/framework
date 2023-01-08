@@ -1,4 +1,9 @@
-.idea
-vendor
-composer.lock
+.env.development
+.env.production
+.env.testing
+.env
+
 .phpunit.result.cache
+.phpdoc
+./vendor
+./docs
