@@ -59,7 +59,7 @@ Please note that this library is still in heavy development stages and is in no 
 
 ### Requirements
 
-- PHP 8.1
+- PHP 8.2
 - PDO
 
 ### How to get started
