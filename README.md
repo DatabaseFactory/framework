@@ -7,7 +7,7 @@ DatabaseFactory
 Please note that this library is still in heavy development stages and is in no way ready for production use.
 ___
 
-> The aim of DatabaseFactory is to give PHP application developers a means
+> The aim of DatabaseFactory is to give PHP application developers a dependency-free means
 > to securely and efficiently interact with, manage and manipulate their databases with a simple,
 > and intuitive API.
 
