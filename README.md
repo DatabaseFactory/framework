@@ -194,8 +194,7 @@ App\Entities\User::join('users_roles', 'users.id, users.name, users.email', ['us
 
 ```mysql
 SELECT users.id, users.name, users.email
-FROM users
-         INNER JOIN users_roles ON users_roles.user_id = users.id
+FROM users INNER JOIN users_roles ON users_roles.user_id = users.id
     AND users.email <> ''
     AND users.name <> ''
     AND users.email LIKE '%proton%'
