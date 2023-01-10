@@ -9,7 +9,8 @@ ___
 
 > The aim of DatabaseFactory is to give PHP application developers a dependency-free means
 > to securely and efficiently interact with, manage and manipulate their databases with a simple,
-> and intuitive API. To check out the API documentation, [visit this link](https://databasefactory.github.io/framework/).
+> and intuitive API. To check out the API documentation, [visit this link](https://databasefactory.github.io/framework/). Or,
+> to view the _wiki_ pages, [go here](https://github.com/DatabaseFactory/framework/wiki).
 
 ### Goals
 
@@ -56,9 +57,6 @@ ___
 
 - PHP 8.2
 - PDO
-
-### Getting Started
-> To get a good idea of how to implement and use **DatabaseFactory**, I would advise that you look at the _Wiki Pages_, by going [here](https://github.com/DatabaseFactory/framework/wiki).
 
 ### License
 
