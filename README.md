@@ -4,9 +4,8 @@
 DatabaseFactory
 </h1>
 
-<div style="text-align: justify !important; background: #ab5a1e; padding: .45rem; color: #f9f9f9;">
 Please note that this library is still in heavy development stages and is in no way ready for production use.
-</div>
+___
 
 <div style="text-align: justify !important;">
 
