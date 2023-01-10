@@ -1,6 +1,8 @@
+<h1 style="text-align: center !important;"> 
 <img src="https://www.svgrepo.com/show/224774/database.svg" alt="Logo" style="width: 9.0rem; margin-right: 0.5rem;"> 
 
-# DatabaseFactory
+DatabaseFactory
+</h1>
 
 Please note that this library is still in heavy development stages and is in no way ready for production use.
 ___
