@@ -1,6 +1,20 @@
 language: php
+
 php:
-  - 'nightly'
+  - 8.1
+
+before_script:
+  - composer self-update
+  - composer install --prefer-source --no-interaction --dev
+
+script:
+  - composer test
+
 before_install:
-- composer install
-script: phpunit
+  - mysql -e 'CREATE DATABASE db_factory;'
+
+services:
+  - mysql
+
+notifications:
+  email: false
