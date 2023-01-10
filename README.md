@@ -37,7 +37,7 @@ ___
     - This library is intended to be manipulated and extended with very little effort. Customizing DatabaseFactory is
       extremely simple and gives developers full control over the API.
 - **Documentation**
-    - **DatabaseFactory** aims to be well documented. The main repository contains a Wiki folder, which contains the
+    - **DatabaseFactory** aims to be well documented. The main repository contains a [Wiki section](https://github.com/DatabaseFactory/framework/wiki), which contains the
       libraries
       corresponding documentation files in _markdown_ format.
 
