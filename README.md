@@ -2,6 +2,8 @@
 <img src="https://www.svgrepo.com/show/224774/database.svg" alt="Logo" style="width: 9.0rem; margin-right: 0.5rem;"> 
 
 DatabaseFactory
+
+[![Build Status](https://app.travis-ci.com/jason-napolitano/DatabaseFactory.svg?branch=master)](https://app.travis-ci.com/jason-napolitano/DatabaseFactory)
 </h1>
 
 Please note that this library is still in heavy development stages and is in no way ready for production use.
