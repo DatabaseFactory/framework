@@ -76,19 +76,19 @@ namespace DatabaseFactory\Helpers {
         {
             return (new ReflectionClass($class))->implementsInterface($interface);
         }
-	
-	    /**
-	     * Are two classes the same as one another?
-	     *
-	     * @param string $classOne
-	     * @param string $classTwo
-	     *
-	     * @return bool
-	     */
-	    public static function equals(string $classOne, string $classTwo): bool
-	    {
-		    return $classOne === $classTwo;
-		}
+
+        /**
+         * Are two classes the same as one another?
+         *
+         * @param string $classOne
+         * @param string $classTwo
+         *
+         * @return bool
+         */
+        public static function equals(string $classOne, string $classTwo): bool
+        {
+            return $classOne === $classTwo;
+        }
 
         /**
          * Wrapper for class_exists()

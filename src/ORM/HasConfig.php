@@ -1,11 +1,11 @@
 <?php
 
 namespace DatabaseFactory\ORM {
-	
-	use DatabaseFactory\Builder;
-	use DatabaseFactory\Facades;
-	
-	/**
+
+    use DatabaseFactory\Builder;
+    use DatabaseFactory\Facades;
+
+    /**
      * Allows an entity the ability to return all records
      *
      * @package DatabaseFactory\ORM

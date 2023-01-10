@@ -1,11 +1,11 @@
 <?php
 
 namespace DatabaseFactory\ORM {
-	
-	use DatabaseFactory\Facades\DB;
-	
-	
-	/**
+
+    use DatabaseFactory\Facades\DB;
+
+
+    /**
      * Allows an entity the ability to return records
      * based on a WHERE clause
      *

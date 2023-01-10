@@ -14,11 +14,11 @@ namespace DatabaseFactory\Contracts {
      */
     interface BaseEntityInterface
     {
-	    /**
-	     * Save a record
-	     *
-	     * @return bool|int
-	     */
-	    public function save(): bool|int;
+        /**
+         * Save a record
+         *
+         * @return bool|int
+         */
+        public function save(): bool|int;
     }
 }

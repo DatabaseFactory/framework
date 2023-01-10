@@ -14,11 +14,11 @@ namespace DatabaseFactory\Helpers {
      */
     class Cli
     {
-	    /**
-	     * Is the current request a CLI request?
-	     *
-	     * @return bool
-	     */
+        /**
+         * Is the current request a CLI request?
+         *
+         * @return bool
+         */
         public static function isCli(): bool
         {
             if (PHP_SAPI === 'cli') {

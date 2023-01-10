@@ -13,16 +13,14 @@
     "squizlabs/php_codesniffer": "^3.7"
   },
   "scripts": {
+    "fix:tests": "phpcbf --standard=PSR12 ./tests",
     "test": "vendor/bin/phpunit ./tests --testdox",
-    "sniff": "phpcs --standard=PSR12 ./src",
-    "dump": "composer dump-autoload -o",
     "fix": "phpcbf --standard=PSR12 ./src"
   },
   "autoload": {
     "psr-4": {
       "DatabaseFactory\\": "src",
-      "Tests\\": "tests",
-      "App\\": "app"
+      "Tests\\": "tests"
     }
   }
 }

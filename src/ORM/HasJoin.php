@@ -3,7 +3,7 @@
 namespace DatabaseFactory\ORM {
 
     use DatabaseFactory\Facades\DB;
-	
+
     /**
      * Allows an entity the ability to join tables
      *

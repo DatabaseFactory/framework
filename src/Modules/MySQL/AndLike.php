@@ -1,11 +1,11 @@
 <?php
 
 namespace DatabaseFactory\Modules\MySQL {
-	
-	use DatabaseFactory\Modules;
-	use DatabaseFactory\Contracts;
-	
-	/**
+
+    use DatabaseFactory\Modules;
+    use DatabaseFactory\Contracts;
+
+    /**
      * SQL LIKE
      *
      * @package DatabaseFactory\Modules

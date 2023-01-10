@@ -17,18 +17,17 @@ namespace DatabaseFactory\Modules\MySQL {
      */
     class Builder extends Modules\BaseBuilder implements Contracts\BaseBuilderInterface
     {
-	
-	    public static function contains(string $field, $value): string
-	    {
-		    return self::WHERE . 'find_in_set' . self::OPPAR . self::SGLQT . $value . self::SGLQT . self::SEPARATOR . $field . self::CLPAR > 0;
-		}
-	
-	    public static function like(string $pattern, bool $not = false): string
-	    {
-			$not = $not ? self::NOT : self::EMPTY;
-		    return $not . self::LIKE . static::SGLQT . self::PERC . $pattern . self::PERC . static::SGLQT;
-		}
-		
+        public static function contains(string $field, $value): string
+        {
+            return self::WHERE . 'find_in_set' . self::OPPAR . self::SGLQT . $value . self::SGLQT . self::SEPARATOR . $field . self::CLPAR > 0;
+        }
+
+        public static function like(string $pattern, bool $not = false): string
+        {
+            $not = $not ? self::NOT : self::EMPTY;
+            return $not . self::LIKE . static::SGLQT . self::PERC . $pattern . self::PERC . static::SGLQT;
+        }
+
         public static function select(string $columns, bool $space = false): string
         {
             $select = $space ? self::SPC : self::EMPTY;
