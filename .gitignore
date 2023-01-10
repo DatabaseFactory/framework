@@ -5,6 +5,5 @@
 
 /docs/phpDocumentor.phar
 .phpunit.result.cache
-/docs/api/
 ./vendor
 .phpdoc
