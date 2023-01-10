@@ -181,6 +181,7 @@ $user->save();
 ```php
 App\Entities\User::join('users_roles', 'users.id, users.name, users.email', ['users_roles.user_id', 'users.id'])
 	->and('users.email', '<>', '')
+	->and('users.name', '<>', '')
 	->andLike('users.email', 'proton')
 	->notLike('users.email', 'gmail')
 	->groupBy('users_roles.user_id, users.id')
