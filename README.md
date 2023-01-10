@@ -9,7 +9,7 @@ ___
 
 > The aim of DatabaseFactory is to give PHP application developers a dependency-free means
 > to securely and efficiently interact with, manage and manipulate their databases with a simple,
-> and intuitive API.
+> and intuitive API. To check out the API documentation, [visit this link](https://databasefactory.github.io/framework/).
 
 ### Goals
 
