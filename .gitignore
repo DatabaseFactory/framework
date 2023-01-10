@@ -3,7 +3,8 @@
 .env.testing
 .env
 
+/docs/phpDocumentor.phar
 .phpunit.result.cache
-.phpdoc
+/docs/api/
 ./vendor
-./docs
+.phpdoc

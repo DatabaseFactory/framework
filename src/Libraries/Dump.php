@@ -10,7 +10,8 @@ namespace DatabaseFactory\Libraries {
      * Built-in dump library
      *
      * @package DatabaseFactory\Libraries
-     * @author  Jason Napolitano
+     * @author  ghostff
+     * @link    https://github.com/Ghostff/Dump7
      *
      * @version 1.0.0
      * @since   1.0.0

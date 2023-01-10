@@ -9,7 +9,7 @@ namespace DatabaseFactory\Libraries {
      * goes to the CodeIgniter Team.
      *
      * @package DatabaseFactory\Libraries
-     * @author  CodeIgniter
+     * @author  CodeIgniter Team
      * @link    https://codeigniter.com/
      *
      * @version 1.0.0
