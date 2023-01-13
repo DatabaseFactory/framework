@@ -24,9 +24,9 @@ namespace DatabaseFactory\Helpers {
          *
          * @return void
          */
-        public static function init(string $path): void
+        public static function init(string $path, string $file = '.env'): void
         {
-            (new Libraries\Dotenv($path))->load();
+            (new Libraries\Dotenv($path, $file))->load();
         }
 
         /**
@@ -49,9 +49,10 @@ namespace DatabaseFactory\Helpers {
          *
          * @return void
          */
-        public static function set(string $key, string|array|bool $value): void
+        public static function set(string $key, string|array|bool $value): bool
         {
             $_ENV[$key] = $value;
+            return array_key_exists($value, $_ENV);
         }
 
         /**

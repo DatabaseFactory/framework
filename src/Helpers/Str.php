@@ -133,7 +133,7 @@ namespace DatabaseFactory\Helpers {
          *
          * @return false|string
          */
-        private static function isSame(string $string)
+        private static function isSame(string $string): bool
         {
             return in_array(strtolower($string), self::$uncountable, true) ? $string : false;
         }

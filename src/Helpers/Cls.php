@@ -1,9 +1,9 @@
 <?php
 
 namespace DatabaseFactory\Helpers {
-
-    use Throwable;
+    
     use ReflectionClass;
+    use Throwable;
 
     /**
      * Helper for working with classes and objects
@@ -32,13 +32,15 @@ namespace DatabaseFactory\Helpers {
         {
             return is_subclass_of($class, $parent);
         }
-
+    
         /**
          * Returns only a classes namespace name
          *
          * @param string $classname
          *
          * @return string
+         *
+         * @throws \ReflectionException
          */
         public static function getNamespace(string $classname): string
         {
@@ -51,6 +53,8 @@ namespace DatabaseFactory\Helpers {
          * @param string $classname
          *
          * @return string
+         *
+         * @throws \ReflectionException
          */
         public static function stripNamespace(string $classname): string
         {
@@ -63,6 +67,8 @@ namespace DatabaseFactory\Helpers {
          * @param string $exception
          *
          * @return bool
+         *
+         * @throws \ReflectionException
          */
         public static function throwable(string $exception): bool
         {
@@ -71,6 +77,13 @@ namespace DatabaseFactory\Helpers {
 
         /**
          * Does a class implement an interface?
+         *
+         * @param string $class
+         * @param string $interface
+         *
+         * @return bool
+         *
+         * @throws \ReflectionException
          */
         public static function implements(string $class, string $interface): bool
         {
