@@ -6,7 +6,8 @@ namespace DatabaseFactory {
     use DatabaseFactory\Modules;
     use DatabaseFactory\Facades;
     use DatabaseFactory\Exceptions;
-
+    use DatabaseFactory\Collections;
+    
     /**
      * The main Query DB class. This class is responsible for
      * building queries and handling the libraries that are used to
@@ -201,7 +202,7 @@ namespace DatabaseFactory {
          */
         public function close(): void
         {
-            unset($this->connection);
+            unset($this->query, $this->connection);
         }
 
         /**
@@ -217,13 +218,13 @@ namespace DatabaseFactory {
         /**
          * Wrapper for $this->get()
          *
-         * @return array
+         * @return \DatabaseFactory\Collections\ToArray
          * @see \DatabaseFactory\Builder::get()
          *
          */
         public function toArray(): array
         {
-            return (array)$this->get();
+            return (new Collections\ToArray($this->get()))->collection();
         }
 
         /**
@@ -233,9 +234,12 @@ namespace DatabaseFactory {
          *
          * @throws \JsonException
          */
-        public function toJSON(): bool|string
+        public function toJSON(): string
         {
-            return json_encode($this->toArray(), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
+            return json_encode(
+                (new Collections\ToJSON($this->get())),
+                JSON_THROW_ON_ERROR|JSON_PRETTY_PRINT
+            );
         }
 
         /**
