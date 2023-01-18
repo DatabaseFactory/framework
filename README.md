@@ -1,18 +1,15 @@
-<h1 style="text-align: center !important;"> 
-<img src="https://www.svgrepo.com/show/224774/database.svg" alt="Logo" style="width: 9.0rem; margin-right: 0.5rem;"> 
-
-DatabaseFactory
-
-[![Build Status](https://app.travis-ci.com/jason-napolitano/DatabaseFactory.svg?branch=master)](https://app.travis-ci.com/jason-napolitano/DatabaseFactory)
-</h1>
-
-Please note that this library is still in heavy development stages and is in no way ready for production use.
-___
+# DatabaseFactory
 
 > The aim of DatabaseFactory is to give PHP application developers a dependency-free means
 > to securely and efficiently interact with, manage and manipulate their databases with a simple,
-> and intuitive API. To check out the API documentation, [visit this link](https://databasefactory.github.io/framework/). Or,
-> to view the _wiki_ pages, [go here](https://github.com/DatabaseFactory/framework/wiki).
+> and intuitive API.
+
+Please note that this library is still in heavy development stages and is **not yet ready**
+for production use.
+
+| Travis                                                                                                                                                      | API Docs                                                  | Wiki Pages                                                     |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|----------------------------------------------------------------|
+| [![Build Status](https://app.travis-ci.com/jason-napolitano/DatabaseFactory.svg?branch=master)](https://app.travis-ci.com/jason-napolitano/DatabaseFactory) | [View Here](https://databasefactory.github.io/framework/) | [View Here](https://github.com/DatabaseFactory/framework/wiki) |
 
 ### Goals
 
@@ -23,8 +20,8 @@ ___
       Dotenv
       library is properly configured within your project.
       <br /> <br />
-      While **DatabaseFactory** does <u>not</u> dictate how you load
-      your `env` config, it does mandate that you have it configured. This is done in order to ensure that developers
+      While **DatabaseFactory** does _not dictate_ how you load
+      your `env` config, it _does_ mandate that you have it configured. This is done in order to ensure that developers
       are following recommended practices for building secure applications.
       If you are unable to add this dependency, or simply don't feel like doing so
       then fret not, a configurable library is provided for your use.
@@ -40,7 +37,8 @@ ___
     - This library is intended to be manipulated and extended with very little effort. Customizing DatabaseFactory is
       extremely simple and gives developers full control over the API.
 - **Documentation**
-    - **DatabaseFactory** aims to be well documented. The main repository contains a [Wiki section](https://github.com/DatabaseFactory/framework/wiki), which contains the
+    - **DatabaseFactory** aims to be well documented. The main repository contains
+      a [Wiki section](https://github.com/DatabaseFactory/framework/wiki), which contains the
       libraries
       corresponding documentation files in _markdown_ format.
 
@@ -57,12 +55,13 @@ ___
 
 ### Requirements
 
-- PHP 8.2
-- PDO
+- PHP 8.1 (or greater)
+- PDO Extension
 
 ### License
 
-&copy; 2023 - **DatabaseFactory** is released under the MIT license
+&copy; 2023 - **DatabaseFactory** and all related components are released under
+the MIT license
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
