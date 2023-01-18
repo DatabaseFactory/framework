@@ -1,12 +1,12 @@
 <?php
 
-namespace DatabaseFactory\Modules\MySQL {
+namespace DatabaseFactory\Modules {
 
-    use DatabaseFactory\Modules;
     use DatabaseFactory\Contracts;
+    use DatabaseFactory\Config;
 
     /**
-     * SQL ORDER BY
+     * SQL LIMIT
      *
      * @package DatabaseFactory\Modules
      * @author  Jason Napolitano
@@ -15,14 +15,14 @@ namespace DatabaseFactory\Modules\MySQL {
      * @since   1.0.0
      * @license MIT <https://mit-license.org>
      */
-    class OrderBy extends Modules\MySQL\Builder implements Contracts\SQLStatementInterface
+    class Limit extends Config\BaseBuilder implements Contracts\SQLStatementInterface
     {
         /**
          * @inheritDoc
          */
         public function statement(string $table, ...$params): string
         {
-            return static::ORDER_BY . $params[0] . static::SPC . $params[1] ?? static::ASC;
+            return static::limit($params[0]);
         }
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace DatabaseFactory\Modules\MySQL {
+namespace DatabaseFactory\Modules {
 
-    use DatabaseFactory\Modules;
     use DatabaseFactory\Contracts;
+    use DatabaseFactory\Config;
 
     /**
      * SQL OR
@@ -15,7 +15,7 @@ namespace DatabaseFactory\Modules\MySQL {
      * @since   1.0.0
      * @license MIT <https://mit-license.org>
      */
-    class OrWhere extends Modules\MySQL\Builder implements Contracts\SQLStatementInterface
+    class OrWhere extends Config\BaseBuilder implements Contracts\SQLStatementInterface
     {
         /**
          * @inheritDoc

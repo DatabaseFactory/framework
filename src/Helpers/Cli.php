@@ -30,9 +30,10 @@ namespace DatabaseFactory\Helpers {
             if (stripos(PHP_SAPI, 'cgi') !== false && getenv('TERM')) {
                 return true;
             }
-            if (!isset($_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT']) && isset($_SERVER['argv']) && count(
-                $_SERVER['argv']
-            ) > 0
+            if (
+                !isset($_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT']) && isset($_SERVER['argv']) && count(
+                    $_SERVER['argv']
+                ) > 0
             ) {
                 return true;
             }

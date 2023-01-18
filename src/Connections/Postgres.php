@@ -1,9 +1,9 @@
 <?php
 
 namespace DatabaseFactory\Connections {
-    
+
     use DatabaseFactory\Contracts;
-    
+
     /**
      * The SQLSrv connection class handles the connection to a
      * MSSQL database
@@ -30,7 +30,8 @@ namespace DatabaseFactory\Connections {
          */
         public static function connection(string $database, string $hostname): string
         {
-            return self::$driver . ":host=$hostname;port=5432;dbname=$database;";
+            $port = getenv('DB_PORT') ?: '5432';
+            return self::$driver . ":host=$hostname;port=" . $port . ";dbname=$database;";
         }
     }
 }

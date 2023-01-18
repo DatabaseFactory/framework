@@ -55,9 +55,7 @@ namespace DatabaseFactory\Facades {
         public static function table(string $table, string $config = Config\BaseConfig::class): Builder
         {
             // does the config class implement the BaseConfigInterface?
-            if (
-                !Helpers\Cls::implements($config, Contracts\BaseConfigInterface::class)
-            ) {
+            if (!Helpers\Cls::implements($config, Contracts\BaseConfigInterface::class)) {
                 // if not, throw a new QueryBuilderException
                 throw new Exceptions\QueryBuilderException(
                     'The config file must implement ' . Contracts\BaseConfigInterface::class

@@ -3,11 +3,10 @@
 namespace DatabaseFactory {
 
     use DatabaseFactory\Helpers;
-    use DatabaseFactory\Modules;
     use DatabaseFactory\Facades;
     use DatabaseFactory\Exceptions;
     use DatabaseFactory\Collections;
-    
+
     /**
      * The main Query DB class. This class is responsible for
      * building queries and handling the libraries that are used to
@@ -58,6 +57,7 @@ namespace DatabaseFactory {
          * @see \DatabaseFactory\Config\BaseConfig::$modules
          */
         private array $modules = [
+            'whereNot' => null,
             'groupBy'  => null,
             'orderBy'  => null,
             'andLike'  => null,
@@ -113,11 +113,11 @@ namespace DatabaseFactory {
         public function __call(string $module = null, mixed $arguments = null): Builder
         {
             // let's ensure that the $name passed through lives within
-            // the $modules collection
+            // the $modules array
             if (!Helpers\Arr::hasKey($module, $this->modules)) {
                 // if not, let's throw an error
                 throw new Exceptions\InvalidModuleException(
-                    $module . ' must exist within the $modules collection'
+                    $module . ' must exist within the $modules array'
                 );
             }
 
@@ -125,9 +125,9 @@ namespace DatabaseFactory {
             $currentModule = $this->modules[$module] = (new $this->config())->modules()[$module];
 
             // let's see if that module extends the base builder
-            if (!Helpers\Cls::extends($currentModule, Modules\BaseBuilder::class)) {
+            if (!Helpers\Cls::extends($currentModule, Config\BaseBuilder::class)) {
                 throw new Exceptions\InvalidModuleException(
-                    $module . ' module must extend ' . Modules\BaseBuilder::class
+                    $module . ' module must extend ' . Config\BaseBuilder::class
                 );
             }
 
@@ -238,7 +238,7 @@ namespace DatabaseFactory {
         {
             return json_encode(
                 (new Collections\ToJSON($this->get())),
-                JSON_THROW_ON_ERROR|JSON_PRETTY_PRINT
+                JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT
             );
         }
 

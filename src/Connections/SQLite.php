@@ -1,9 +1,9 @@
 <?php
 
 namespace DatabaseFactory\Connections {
-    
+
     use DatabaseFactory\Contracts;
-    
+
     /**
      * The SQLSrv connection class handles the connection to a
      * MSSQL database

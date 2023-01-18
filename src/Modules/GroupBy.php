@@ -1,12 +1,12 @@
 <?php
 
-namespace DatabaseFactory\Modules\MySQL {
+namespace DatabaseFactory\Modules {
 
-    use DatabaseFactory\Modules;
     use DatabaseFactory\Contracts;
+    use DatabaseFactory\Config;
 
     /**
-     * SQL WHERE
+     * SQL GROUP BY
      *
      * @package DatabaseFactory\Modules
      * @author  Jason Napolitano
@@ -15,14 +15,14 @@ namespace DatabaseFactory\Modules\MySQL {
      * @since   1.0.0
      * @license MIT <https://mit-license.org>
      */
-    class Where extends Modules\MySQL\Builder implements Contracts\SQLStatementInterface
+    class GroupBy extends Config\BaseBuilder implements Contracts\SQLStatementInterface
     {
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         public function statement(string $table, ...$params): string
         {
-            return static::WHERE . $table . static::PRD . $params[0] . static::SPC . $params[1] . static::SPC . static::SGLQT . $params[2] . static::SGLQT;
+            return static::GROUP_BY . static::columns($params);
         }
     }
 }

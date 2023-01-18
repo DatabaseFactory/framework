@@ -14,6 +14,18 @@ namespace DatabaseFactory\Contracts {
      */
     interface BaseConfigInterface
     {
+        /**
+         * Return the $modules array
+         *
+         * @return array|string[]
+         */
         public function modules(): array;
+    
+        /**
+         * Return the $env array
+         *
+         * @return array|string[]
+         */
+        public function env(): array;
     }
 }
