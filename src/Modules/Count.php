@@ -1,12 +1,12 @@
 <?php
 
-namespace DatabaseFactory\Modules\MySQL {
+namespace DatabaseFactory\Modules {
 
-    use DatabaseFactory\Modules;
     use DatabaseFactory\Contracts;
+    use DatabaseFactory\Config;
 
     /**
-     * SQL OFFSET
+     * SQL COUNT
      *
      * @package DatabaseFactory\Modules
      * @author  Jason Napolitano
@@ -15,14 +15,14 @@ namespace DatabaseFactory\Modules\MySQL {
      * @since   1.0.0
      * @license MIT <https://mit-license.org>
      */
-    class Offset extends Modules\MySQL\Builder implements Contracts\SQLStatementInterface
+    class Count extends Config\BaseBuilder implements Contracts\SQLStatementInterface
     {
         /**
          * @inheritDoc
          */
         public function statement(string $table, ...$params): string
         {
-            return static::offset($params[0]);
+            return self::select($params[0]) . self::count() . self::from($table);
         }
     }
 }

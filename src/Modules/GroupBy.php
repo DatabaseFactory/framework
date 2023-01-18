@@ -1,12 +1,12 @@
 <?php
 
-namespace DatabaseFactory\Modules\MySQL {
+namespace DatabaseFactory\Modules {
 
-    use DatabaseFactory\Modules;
     use DatabaseFactory\Contracts;
+    use DatabaseFactory\Config;
 
     /**
-     * SQL SELECT
+     * SQL GROUP BY
      *
      * @package DatabaseFactory\Modules
      * @author  Jason Napolitano
@@ -15,14 +15,14 @@ namespace DatabaseFactory\Modules\MySQL {
      * @since   1.0.0
      * @license MIT <https://mit-license.org>
      */
-    class Select extends Modules\MySQL\Builder implements Contracts\SQLStatementInterface
+    class GroupBy extends Config\BaseBuilder implements Contracts\SQLStatementInterface
     {
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         public function statement(string $table, ...$params): string
         {
-            return self::select($params[0] ? : '*') . self::from($table);
+            return static::GROUP_BY . static::columns($params);
         }
     }
 }

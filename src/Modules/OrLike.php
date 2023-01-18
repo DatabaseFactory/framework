@@ -1,12 +1,12 @@
 <?php
 
-namespace DatabaseFactory\Modules\MySQL {
+namespace DatabaseFactory\Modules {
 
-    use DatabaseFactory\Modules;
     use DatabaseFactory\Contracts;
+    use DatabaseFactory\Config;
 
     /**
-     * SQL LIMIT
+     * SQL LIKE
      *
      * @package DatabaseFactory\Modules
      * @author  Jason Napolitano
@@ -15,14 +15,14 @@ namespace DatabaseFactory\Modules\MySQL {
      * @since   1.0.0
      * @license MIT <https://mit-license.org>
      */
-    class Limit extends Modules\MySQL\Builder implements Contracts\SQLStatementInterface
+    class OrLike extends Config\BaseBuilder implements Contracts\SQLStatementInterface
     {
         /**
          * @inheritDoc
          */
         public function statement(string $table, ...$params): string
         {
-            return static::limit($params[0]);
+            return self::OR . $table . self::PRD . $params[0] . static::like($params[1]);
         }
     }
 }

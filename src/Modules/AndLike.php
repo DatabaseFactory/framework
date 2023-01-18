@@ -1,12 +1,12 @@
 <?php
 
-namespace DatabaseFactory\Modules\MySQL {
+namespace DatabaseFactory\Modules {
 
-    use DatabaseFactory\Modules;
     use DatabaseFactory\Contracts;
+    use DatabaseFactory\Config;
 
     /**
-     * SQL JOIN
+     * SQL LIKE
      *
      * @package DatabaseFactory\Modules
      * @author  Jason Napolitano
@@ -15,15 +15,14 @@ namespace DatabaseFactory\Modules\MySQL {
      * @since   1.0.0
      * @license MIT <https://mit-license.org>
      */
-    class Join extends Modules\MySQL\Builder implements Contracts\SQLStatementInterface
+    class AndLike extends Config\BaseBuilder implements Contracts\SQLStatementInterface
     {
         /**
          * @inheritDoc
          */
         public function statement(string $table, ...$params): string
         {
-            $columns = $params[2] ?? '*';
-            return static::select($columns) . static::from($table) . static::join($params[0], $params[1]);
+            return self::AND . $params[0] . static::like($params[1]);
         }
     }
 }

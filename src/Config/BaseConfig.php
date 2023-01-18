@@ -1,10 +1,10 @@
 <?php
 
 namespace DatabaseFactory\Config {
-
-    use DatabaseFactory\Modules\MySQL;
-    use DatabaseFactory\Contracts\BaseConfigInterface;
-
+    
+    use DatabaseFactory\Modules;
+    use DatabaseFactory\Contracts;
+    
     /**
      * The base configuration file for the library
      *
@@ -15,9 +15,13 @@ namespace DatabaseFactory\Config {
      * @since   1.0.0
      * @license MIT <https://mit-license.org>
      */
-    class BaseConfig implements BaseConfigInterface
+    class BaseConfig implements Contracts\BaseConfigInterface
     {
-        /** @var array|string[] $env env config */
+        /**
+         * ENV config overrides
+         *
+         * @var array|string[] $env
+         */
         protected static array $env = [
             'username' => null,
             'hostname' => null,
@@ -25,33 +29,44 @@ namespace DatabaseFactory\Config {
             'database' => null,
             'driver'   => null,
         ];
-
-        /** @var string[] $modules Query builder modules */
-        protected static array $modules = [
-            'groupBy' => MySQL\GroupBy::class,
-            'orderBy' => MySQL\OrderBy::class,
-            'notLike' => MySQL\NotLike::class,
-            'andLike' => MySQL\AndLike::class,
-            'offset'  => MySQL\Offset::class,
-            'select'  => MySQL\Select::class,
-            'orLike'  => MySQL\OrLike::class,
-            'count'   => MySQL\Count::class,
-            'where'   => MySQL\Where::class,
-            'limit'   => MySQL\Limit::class,
-            'join'    => MySQL\Join::class,
-            'like'    => MySQL\Like::class,
-            'and'     => MySQL\AndWhere::class,
-            'or'      => MySQL\OrWhere::class,
-        ];
-
+    
         /**
-         * Return the $modules array
+         * Query builder modules
          *
-         * @return array|string[]
+         * @var string[] $modules
+         */
+        protected static array $modules = [
+            'whereNot' => Modules\WhereNot::class,
+            'groupBy'  => Modules\GroupBy::class,
+            'orderBy'  => Modules\OrderBy::class,
+            'notLike'  => Modules\NotLike::class,
+            'andLike'  => Modules\AndLike::class,
+            'offset'   => Modules\Offset::class,
+            'select'   => Modules\Select::class,
+            'orLike'   => Modules\OrLike::class,
+            'count'    => Modules\Count::class,
+            'where'    => Modules\Where::class,
+            'limit'    => Modules\Limit::class,
+            'join'     => Modules\Join::class,
+            'like'     => Modules\Like::class,
+            'and'      => Modules\AndWhere::class,
+            'or'       => Modules\OrWhere::class,
+        ];
+        
+        /**
+         * @inheritdoc
          */
         public function modules(): array
         {
             return [...self::$modules, ...static::$modules];
+        }
+        
+        /**
+         * @inheritdoc
+         */
+        public function env(): array
+        {
+            return [...self::$env, ...static::$env];
         }
     }
 }

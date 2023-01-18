@@ -4,7 +4,6 @@ namespace DatabaseFactory\ORM {
 
     use DatabaseFactory\Facades\DB;
 
-
     /**
      * Allows an entity the ability to return records
      * based on a WHERE clause
@@ -18,9 +17,9 @@ namespace DatabaseFactory\ORM {
      */
     trait HasNot
     {
-        public static function not($key = null, $value = null, string $columns = '*')
+        public static function whereNot($key = null, $value = null, string $columns = '*')
         {
-            return DB::table(static::table())->select($columns)->where($key, '<>', $value);
+            return DB::table(static::table())->select($columns)->whereNot($key, $value);
         }
     }
 }

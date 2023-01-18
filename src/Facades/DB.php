@@ -63,7 +63,8 @@ namespace DatabaseFactory\Facades {
             }
 
             // next, does it extend the BaseConfig class?
-            if (!Helpers\Cls::equals($config, Config\BaseConfig::class) &&
+            if (
+                !Helpers\Cls::equals($config, Config\BaseConfig::class) &&
                 !Helpers\Cls::extends($config, Config\BaseConfig::class)
             ) {
                 // if not, throw a new QueryBuilderException

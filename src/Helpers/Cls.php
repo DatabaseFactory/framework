@@ -1,7 +1,7 @@
 <?php
 
 namespace DatabaseFactory\Helpers {
-    
+
     use ReflectionClass;
     use Throwable;
 
@@ -32,7 +32,7 @@ namespace DatabaseFactory\Helpers {
         {
             return is_subclass_of($class, $parent);
         }
-    
+
         /**
          * Returns only a classes namespace name
          *
