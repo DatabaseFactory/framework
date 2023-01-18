@@ -1,11 +1,11 @@
 <?php
 
 namespace DatabaseFactory\Connections {
-
+    
     use DatabaseFactory\Contracts;
-
+    
     /**
-     * The DBLib connection class handles the connection to a
+     * The SQLSrv connection class handles the connection to a
      * MSSQL database
      *
      * @package DatabaseFactory\Connections
@@ -15,10 +15,10 @@ namespace DatabaseFactory\Connections {
      * @since   1.0.0
      * @license MIT <https://mit-license.org>
      */
-    class DBLib implements Contracts\ConnectionInterface
+    class SQLite implements Contracts\ConnectionInterface
     {
         /** @var string $driver Database Driver */
-        protected static string $driver = 'dblib';
+        protected static string $driver = 'sqlite';
 
         /**
          * Sets the connection string and returns it
@@ -30,7 +30,7 @@ namespace DatabaseFactory\Connections {
          */
         public static function connection(string $database, string $hostname): string
         {
-            return self::$driver . ":host=$hostname:" . getenv('MSSQL_PORT') . ";dbname=$database";
+            return self::$driver . str_ends_with($database, '.db') ? ":$database" : ":$database.db";
         }
     }
 }
