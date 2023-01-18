@@ -18,44 +18,51 @@ namespace DatabaseFactory\Config {
     class BaseBuilder implements Contracts\BaseBuilderInterface
     {
 
-        final protected const COUNT = 'COUNT';
-        final protected const WHERE = ' WHERE ';
-        final protected const LIKE = ' LIKE ';
-        final protected const ORDER_BY = ' ORDER BY ';
-        final protected const GROUP_BY = ' GROUP BY ';
-        final protected const SELECT = 'SELECT';
-        final protected const INSERT = 'INSERT ';
-        final protected const UPDATE = 'UPDATE ';
-        final protected const DELETE = 'DELETE ';
-        final protected const JOIN = ' JOIN ';
-        final protected const OFFSET = ' OFFSET';
-        final protected const LIMIT = ' LIMIT';
-        final protected const OR_NOT = ' OR NOT ';
-        final protected const FROM = ' FROM ';
-        final protected const NOT = ' <>';
-        final protected const AND = ' AND ';
-        final protected const SEPARATOR = ', ';
-        final protected const BKTK = '`';
-        final protected const EQUALS = ' = ';
-        final protected const COMMA = ',';
-        final protected const SPC = ' ';
-        final protected const EMPTY = '';
-        final protected const SGLQT = "'";
-        final protected const DBLQT = '"';
-        final protected const PRD = '.';
-        final protected const ON = ' ON ';
-        final protected const OR = ' OR ';
-        final protected const TRUE = 'TRUE';
-        final protected const FALSE = 'FALSE';
-        final protected const ZERO = 0;
-        final protected const ONE = 1;
-        final protected const ASC = 'ASC';
-        final protected const DESC = 'DESC';
-        final protected const OPPAR = '(';
-        final protected const CLPAR = ')';
-        final protected const VALUE = '`?`';
-        final protected const ALL = '*';
-        final protected const PERC = '%';
+        protected const COUNT = 'COUNT';
+        protected const WHERE = ' WHERE ';
+        protected const LIKE = ' LIKE ';
+        protected const ORDER_BY = ' ORDER BY ';
+        protected const GROUP_BY = ' GROUP BY ';
+        protected const SELECT = 'SELECT';
+        protected const INSERT = 'INSERT ';
+        protected const UPDATE = 'UPDATE ';
+        protected const DELETE = 'DELETE ';
+        protected const JOIN = 'JOIN ';
+        protected const OFFSET = ' OFFSET';
+        protected const LIMIT = ' LIMIT';
+        protected const OR_NOT = ' OR NOT ';
+        protected const FROM = ' FROM ';
+        protected const NOT = ' <>';
+        protected const AND = ' AND ';
+        protected const SEPARATOR = ', ';
+        protected const BKTK = '`';
+        protected const EQUALS = ' = ';
+        protected const COMMA = ',';
+        protected const SPC = ' ';
+        protected const EMPTY = '';
+        protected const SGLQT = "'";
+        protected const DBLQT = '"';
+        protected const PRD = '.';
+        protected const ON = ' ON ';
+        protected const OR = ' OR ';
+        protected const TRUE = 'TRUE';
+        protected const FALSE = 'FALSE';
+        protected const ZERO = 0;
+        protected const ONE = 1;
+        protected const ASC = 'ASC';
+        protected const DESC = 'DESC';
+        protected const OPPAR = '(';
+        protected const CLPAR = ')';
+        protected const VALUE = '`?`';
+        protected const ALL = '*';
+        protected const PERC = '%';
+        
+        // joins
+        protected const LEFT = ' LEFT';
+        protected const RIGHT = ' RIGHT';
+        protected const OUTER = ' OUTER';
+        protected const INNER = ' INNER';
+        
 
         /**
          * Strip a string of quotes
