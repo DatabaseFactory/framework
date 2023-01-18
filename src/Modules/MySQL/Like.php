@@ -22,7 +22,7 @@ namespace DatabaseFactory\Modules\MySQL {
          */
         public function statement(string $table, ...$params): string
         {
-            return static::WHERE . $table . static::PRD . $params[0] . static::like($params[1]);
+            return self::where($table, $params[0]) . static::like($params[1]);
         }
     }
 }

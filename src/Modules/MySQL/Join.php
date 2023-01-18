@@ -22,7 +22,8 @@ namespace DatabaseFactory\Modules\MySQL {
          */
         public function statement(string $table, ...$params): string
         {
-            return static::select($params[1]) . static::from($table) . static::join($params[0], $params[2]);
+            $columns = $params[2] ?? '*';
+            return static::select($columns) . static::from($table) . static::join($params[0], $params[1]);
         }
     }
 }

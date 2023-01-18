@@ -30,7 +30,7 @@ namespace DatabaseFactory\Connections {
          */
         public static function connection(string $database, string $hostname): string
         {
-            return self::$driver . ":host=$hostname:" . getenv('MSSQL_PORT') . ";dbname=$database";
+            return self::$driver . ":host=$hostname:" . getenv('DB_PORT') . ";dbname=$database";
         }
     }
 }
