@@ -210,7 +210,7 @@ namespace DatabaseFactory {
          *
          * @return array|null
          */
-        public function get(): ?array
+        private function get(): ?array
         {
             return $this->execute()->fetchAll(\PDO::FETCH_ASSOC);
         }
