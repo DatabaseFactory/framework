@@ -1,11 +1,11 @@
 <?php
 
 namespace DatabaseFactory\Modules {
-	
-	use DatabaseFactory\Config;
-	use DatabaseFactory\Contracts;
-	
-	/**
+
+    use DatabaseFactory\Config;
+    use DatabaseFactory\Contracts;
+
+    /**
      * SQL WHERE
      *
      * @package DatabaseFactory\Modules

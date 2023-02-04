@@ -1,8 +1,8 @@
 <?php
 
-namespace Helpers {
+namespace Tests\Feature\Facades {
     
-    use DatabaseFactory\Helpers\Env;
+    use DatabaseFactory\Facades;
     use Tests\TestCase;
     
     class EnvTest extends TestCase
@@ -12,15 +12,15 @@ namespace Helpers {
         
         public function testLoadFromDefaultEnvFile(): void
         {
-            Env::init($this->path);
-            $this->expected = (bool)Env::get('TEST_KEY');
+            Facades\Env::init($this->path);
+            $this->expected = (bool)Facades\Env::get('TEST_KEY');
             $this->assertTrue($this->expected);
         }
         
         public function testLoadFromCustomEnvFile(): void
         {
-            Env::init($this->path, '.env.example');
-            $this->expected = (bool)Env::get('TEST_KEY');
+            Facades\Env::init($this->path, '.env.example');
+            $this->expected = (bool)Facades\Env::get('TEST_KEY');
             $this->assertTrue($this->expected);
         }
     }

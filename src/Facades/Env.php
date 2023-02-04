@@ -1,6 +1,6 @@
 <?php
 
-namespace DatabaseFactory\Helpers {
+namespace DatabaseFactory\Facades {
 
     use DatabaseFactory\Libraries;
 
@@ -21,6 +21,7 @@ namespace DatabaseFactory\Helpers {
          * library
          *
          * @param string $path
+         * @param string $file
          *
          * @return void
          */
@@ -47,7 +48,7 @@ namespace DatabaseFactory\Helpers {
          * @param string $key
          * @param mixed  $value
          *
-         * @return void
+         * @return bool
          */
         public static function set(string $key, string|array|bool $value): bool
         {

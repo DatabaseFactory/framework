@@ -8,9 +8,9 @@ namespace DatabaseFactory {
     use DatabaseFactory\Collections;
 
     /**
-     * The main Query DB class. This class is responsible for
-     * building queries and handling the libraries that are used to
-     * execute the queries.
+     * The main Query Builder class. Objects initialized from this
+     * class is responsible for building queries and handling the
+     * libraries that are used to execute those queries.
      *
      * @package DatabaseFactory
      * @author  Jason Napolitano
@@ -34,20 +34,6 @@ namespace DatabaseFactory {
          * @var \PDO $connection
          */
         private \PDO $connection;
-
-        /**
-         * Database table
-         *
-         * @var string $table
-         */
-        private readonly string $table;
-
-        /**
-         * Config class
-         *
-         * @var string $config
-         */
-        private readonly string $config;
 
         /**
          * Module collection
@@ -80,17 +66,11 @@ namespace DatabaseFactory {
         /**
          * Constructor
          *
-         * @param string  $table  Database table
-         * @param ?string $config Config class
+         * @param string $table  Database table
+         * @param string $config Config class
          */
-        public function __construct(string $table, string $config = null)
+        public function __construct(private readonly string $table, private readonly string $config)
         {
-            // config class
-            $this->config = $config;
-
-            // database table
-            $this->table = $table;
-
             // connection string
             $this->connection = Facades\DB::connection();
         }
@@ -218,7 +198,8 @@ namespace DatabaseFactory {
         /**
          * Wrapper for $this->get()
          *
-         * @return \DatabaseFactory\Collections\ToArray
+         * @return array
+         *
          * @see \DatabaseFactory\Builder::get()
          *
          */
@@ -232,9 +213,9 @@ namespace DatabaseFactory {
          *
          * @return string|false
          *
-         * @throws \JsonException
+         * @see \DatabaseFactory\Builder::get()
          */
-        public function toJSON(): string
+        public function toJSON(): string|false
         {
             return json_encode(
                 (new Collections\ToJSON($this->get())),
@@ -247,6 +228,8 @@ namespace DatabaseFactory {
          * $query
          *
          * @return string
+         *
+         * @see \DatabaseFactory\Builder::$query
          */
         public function toSQL(): string
         {
@@ -257,6 +240,8 @@ namespace DatabaseFactory {
          * __toString() implementation
          *
          * @return string
+         *
+         * @see \DatabaseFactory\Builder::toSQL()
          */
         public function __toString(): string
         {
@@ -265,6 +250,8 @@ namespace DatabaseFactory {
 
         /**
          * Destructor
+         *
+         * @see \DatabaseFactory\Builder::close()
          */
         public function __destruct()
         {
