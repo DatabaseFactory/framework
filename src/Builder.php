@@ -10,7 +10,7 @@ namespace DatabaseFactory {
     /**
      * The main Query Builder class. Objects initialized from this
      * class is responsible for building queries and handling the
-     * libraries that are used to execute those queries.
+     * libraries that are used to execute those queries
      *
      * @package DatabaseFactory
      * @author  Jason Napolitano
