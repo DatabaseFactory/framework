@@ -1,10 +1,10 @@
 <?php
 
 namespace DatabaseFactory\Config {
-    
+
     use DatabaseFactory\Modules;
     use DatabaseFactory\Contracts;
-    
+
     /**
      * The base configuration file for the library
      *
@@ -29,7 +29,7 @@ namespace DatabaseFactory\Config {
             'database' => null,
             'driver'   => null,
         ];
-    
+
         /**
          * Query builder modules
          *
@@ -52,7 +52,7 @@ namespace DatabaseFactory\Config {
             'and'      => Modules\AndWhere::class,
             'or'       => Modules\OrWhere::class,
         ];
-        
+
         /**
          * @inheritdoc
          */
@@ -60,7 +60,7 @@ namespace DatabaseFactory\Config {
         {
             return [...self::$modules, ...static::$modules];
         }
-        
+
         /**
          * @inheritdoc
          */

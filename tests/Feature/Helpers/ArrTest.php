@@ -1,6 +1,6 @@
 <?php
 
-namespace Helpers {
+namespace Tests\Feature\Helpers {
     
     use DatabaseFactory\Helpers\Arr;
     use Tests\TestCase;

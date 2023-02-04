@@ -17,7 +17,6 @@ namespace DatabaseFactory\Config {
      */
     class BaseBuilder implements Contracts\BaseBuilderInterface
     {
-
         protected const COUNT = 'COUNT';
         protected const WHERE = ' WHERE ';
         protected const LIKE = ' LIKE ';
@@ -56,13 +55,13 @@ namespace DatabaseFactory\Config {
         protected const VALUE = '`?`';
         protected const ALL = '*';
         protected const PERC = '%';
-        
+
         // joins
         protected const LEFT = ' LEFT';
         protected const RIGHT = ' RIGHT';
         protected const OUTER = ' OUTER';
         protected const INNER = ' INNER';
-        
+
 
         /**
          * Strip a string of quotes

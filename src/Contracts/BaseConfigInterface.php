@@ -20,7 +20,7 @@ namespace DatabaseFactory\Contracts {
          * @return array|string[]
          */
         public function modules(): array;
-    
+
         /**
          * Return the $env array
          *
