@@ -40,6 +40,8 @@ namespace DatabaseFactory {
         /**
          * PDO connection instance
          *
+         * @link   https://www.php.net/manual/en/pdo.connections.php
+         *
          * @return \PDO
          */
         public static function start(): PDO
@@ -112,6 +114,11 @@ namespace DatabaseFactory {
             self::$connection = new PDO($string, self::$username, self::$password);
         }
 
+        /**
+         * Returns the PDO connection instance
+         *
+         * @return PDO
+         */
         public static function connection(): PDO
         {
             return self::$connection;
