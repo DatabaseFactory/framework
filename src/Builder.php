@@ -179,6 +179,8 @@ namespace DatabaseFactory {
 
         /**
          * Close the PDO connection
+         *
+         * @link https://www.php.net/manual/en/pdo.connections.php
          */
         public function close(): void
         {
@@ -200,6 +202,7 @@ namespace DatabaseFactory {
          *
          * @return array
          *
+         * @see \DatabaseFactory\Collections\ToArray::collection()
          * @see \DatabaseFactory\Builder::get()
          *
          */
@@ -213,13 +216,13 @@ namespace DatabaseFactory {
          *
          * @return string|false
          *
+         * @see \DatabaseFactory\Collections\ToJSON::jsonSerialize()
          * @see \DatabaseFactory\Builder::get()
          */
         public function toJSON(): string|false
         {
             return json_encode(
-                (new Collections\ToJSON($this->get())),
-                JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT
+               (new Collections\ToJSON($this->get())), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT
             );
         }
 
