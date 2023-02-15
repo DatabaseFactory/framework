@@ -6,7 +6,7 @@ namespace DatabaseFactory\Config {
     use DatabaseFactory\Contracts;
 
     /**
-     * SQL Module DB
+     * SQL BaseBuilder
      *
      * @package DatabaseFactory\Modules
      * @author  Jason Napolitano
@@ -17,6 +17,7 @@ namespace DatabaseFactory\Config {
      */
     class BaseBuilder implements Contracts\BaseBuilderInterface
     {
+        // @todo - reimplement as non-constants (props as an array, perhaps?)
         protected const COUNT = 'COUNT';
         protected const WHERE = ' WHERE ';
         protected const LIKE = ' LIKE ';
@@ -84,7 +85,7 @@ namespace DatabaseFactory\Config {
          */
         protected static function doubleQuote(string $string): string
         {
-            return self::DBLQT . Helpers\Str::stripQuotes($string) . self::DBLQT;
+            return self::DBLQT . self::strip($string) . self::DBLQT;
         }
 
         /**
@@ -96,7 +97,7 @@ namespace DatabaseFactory\Config {
          */
         protected static function singleQuote(string $string): string
         {
-            return self::SGLQT . Helpers\Str::stripQuotes($string) . self::SGLQT;
+            return self::SGLQT . self::strip($string) . self::SGLQT;
         }
 
         /**
@@ -122,43 +123,103 @@ namespace DatabaseFactory\Config {
         {
             return $value - self::ONE;
         }
+
+        /**
+         * Implement FIND_IN_SET(...)
+         *
+         * @param string $field
+         * @param mixed  $value
+         *
+         * @return string
+         */
         public static function contains(string $field, $value): string
         {
             return self::WHERE . 'find_in_set' . self::OPPAR . self::SGLQT . $value . self::SGLQT . self::SEPARATOR . $field . self::CLPAR > 0;
         }
 
+        /**
+         * Implement WHERE
+         *
+         * @param string $columns
+         *
+         * @return string
+         */
         public static function where(string $columns): string
         {
             return static::WHERE . $columns;
         }
 
+        /**
+         * Implement LIKE
+         *
+         * @param string $pattern
+         * @param bool   $not 
+         *
+         * @return string
+         */
         public static function like(string $pattern, bool $not = false): string
         {
             $notStr = $not ? self::NOT : self::EMPTY;
             return $notStr . self::LIKE . static::SGLQT . self::PERC . $pattern . self::PERC . static::SGLQT;
         }
 
+        /**
+         * Implement SELECT
+         *
+         * @param string $columns
+         * @param bool   $space 
+         *
+         * @return string
+         */
         public static function select(string $columns, bool $space = false): string
         {
             $select = $space ? self::SPC : self::EMPTY;
             return self::SELECT . self::SPC . $columns . $select;
         }
 
+        /**
+         * Implement LIMIT
+         *
+         * @param int $rows
+         *
+         * @return string
+         */
         public static function limit(int $rows): string
         {
             return self::LIMIT . self::SPC . $rows;
         }
 
-        public static function offset(int $count): string
+        /**
+         * Implement OFFSET
+         *
+         * @param int $rows
+         *
+         * @return string
+         */
+        public static function offset(int $rows): string
         {
-            return self::OFFSET . self::SPC . $count;
+            return self::OFFSET . self::SPC . $rows;
         }
 
-        public static function count($values = self::ALL): string
+        /**
+         * Implement COUNT
+         *
+         * @param string $values
+         *
+         * @return string
+         */
+        public static function count(string $values = self::ALL): string
         {
             return self::COUNT . self::OPPAR . $values . self::CLPAR;
         }
 
+        /**
+         * Determine values for a query
+         *
+         * @param array $values
+         *
+         * @return string
+         */
         public static function values(array $values): string
         {
             $string = self::OPPAR;
@@ -169,16 +230,38 @@ namespace DatabaseFactory\Config {
             return str_replace($string, '?`, )', '?`)');
         }
 
+        /**
+         * Determine columns of a query
+         *
+         * @param array $columns
+         *
+         * @return string
+         */
         public static function columns(array $columns): string
         {
             return rtrim($columns[0], self::SEPARATOR);
         }
 
+        /**
+         * Implement FROM
+         *
+         * @param string $table
+         *
+         * @return string
+         */
         public static function from(string $table = null): string
         {
             return self::FROM . $table ? : '';
         }
 
+        /**
+         * Implement JOIN
+         *
+         * @param string $params
+         * @param array  $on
+         *
+         * @return string
+         */
         public static function join(string $params, array $on): string
         {
             return static::SPC . static::JOIN . $params . self::ON . rtrim(implode(self::EQUALS, $on), self::EQUALS);
