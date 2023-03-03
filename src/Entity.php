@@ -23,14 +23,6 @@ namespace DatabaseFactory {
         // ORM Plugins
         use ORM\HasConfig;
         use ORM\HasTable;
-        use ORM\HasWhere;
-        use ORM\HasFirst;
-        use ORM\HasJoin;
-        use ORM\HasFind;
-        use ORM\HasLast;
-        use ORM\HasLike;
-        use ORM\HasAll;
-        use ORM\HasNot;
 
         /**
          * ID of a record for updating
