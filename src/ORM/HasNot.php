@@ -1,8 +1,9 @@
 <?php
 
 namespace DatabaseFactory\ORM {
-
-    use DatabaseFactory\Facades\DB;
+	
+	use DatabaseFactory\Builder;
+	use DatabaseFactory\Facades\DB;
 
     /**
      * Allows an entity the ability to return records
@@ -17,9 +18,9 @@ namespace DatabaseFactory\ORM {
      */
     trait HasNot
     {
-        public static function whereNot($key = null, $value = null, string $columns = '*'): array
+        public static function whereNot($key = null, $value = null, string $columns = '*'): Builder
         {
-            return DB::table(static::table())->select($columns)->whereNot($key, $value)->toArray();
+            return DB::table(static::table())->select($columns)->whereNot($key, $value);
         }
     }
 }

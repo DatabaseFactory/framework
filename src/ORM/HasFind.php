@@ -1,8 +1,9 @@
 <?php
 
 namespace DatabaseFactory\ORM {
-
-    use DatabaseFactory\Facades\DB;
+	
+	use DatabaseFactory\Builder;
+	use DatabaseFactory\Facades\DB;
 
     /**
      * Allows an entity the ability to return one record
@@ -16,9 +17,9 @@ namespace DatabaseFactory\ORM {
      */
     trait HasFind
     {
-        public static function find(int $id, string $columns = '*'): array
+        public static function find(int $id, string $columns = '*'): Builder
         {
-            return DB::table(static::table())->select($columns)->where('id', '=', $id)->toArray();
+            return DB::table(static::table())->select($columns)->where('id', '=', $id);
         }
     }
 }
