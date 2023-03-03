@@ -1,12 +1,12 @@
 <?php
 
 namespace DatabaseFactory {
-
+    
     use DatabaseFactory\Helpers;
     use DatabaseFactory\Facades;
     use DatabaseFactory\Exceptions;
     use DatabaseFactory\Collections;
-
+    
     /**
      * The main Query Builder class. Objects initialized from this
      * class are responsible for building queries and handling the
@@ -27,14 +27,14 @@ namespace DatabaseFactory {
          * @var string|null $query
          */
         private ?string $query = '';
-
+        
         /**
          * PDO Connection
          *
          * @var \PDO $connection
          */
         private \PDO $connection;
-
+        
         /**
          * Module collection
          *
@@ -52,6 +52,7 @@ namespace DatabaseFactory {
             'delete'   => null,
             'insert'   => null,
             'offset'   => null,
+            'custom'   => null,
             'select'   => null,
             'orLike'   => null,
             'count'    => null,
@@ -62,7 +63,7 @@ namespace DatabaseFactory {
             'and'      => null,
             'or'       => null,
         ];
-
+        
         /**
          * Constructor
          *
@@ -74,7 +75,7 @@ namespace DatabaseFactory {
             // connection string
             $this->connection = Facades\DB::connection();
         }
-
+        
         /**
          * Check to see if the module used for a query exists within the
          * $modules array, extends the correct class, and implements the
@@ -92,40 +93,45 @@ namespace DatabaseFactory {
          */
         public function __call(string $module = null, mixed $arguments = null): Builder
         {
+            $currentModule = null;
+            $config = new $this->config();
+            
             // let's ensure that the $name passed through lives within
-            // the $modules array
-            if (!Helpers\Arr::hasKey($module, $this->modules)) {
+            // the $modules arrays
+            if (Helpers\Arr::hasKey($module, $this->modules)) {
+                $currentModule = $this->modules[$module] = $config->modules()[$module];
+            } elseif (Helpers\Arr::hasKey($module, $config->modules())) {
+                $this->modules = [];
+                $currentModule = $this->modules[$module] = $config->modules()[$module];
+            } else {
                 // if not, let's throw an error
                 throw new Exceptions\InvalidModuleException(
                     $module . ' must exist within the $modules array'
                 );
             }
-
-            // if it does, let's set it as the current module
-            $currentModule = $this->modules[$module] = (new $this->config())->modules()[$module];
-
+            
             // let's see if that module extends the base builder
             if (!Helpers\Cls::extends($currentModule, Config\BaseBuilder::class)) {
                 throw new Exceptions\InvalidModuleException(
                     $module . ' module must extend ' . Config\BaseBuilder::class
                 );
             }
-
+            
             // let's see if it also conforms to the correct contract
             if (!Helpers\Cls::implements($currentModule, Contracts\SQLStatementInterface::class)) {
                 throw new Exceptions\InvalidModuleException(
                     $module . ' must implement ' . Contracts\SQLStatementInterface::class
                 );
             }
-
+            
             // generate the query returned and assign it to $query
             // for execution
             $this->query .= (new $currentModule())->statement($this->table, ...$arguments);
-
+            
             // allow for method chaining of queries
             return $this;
         }
-
+        
         /**
          * Execute a query and return a PDOStatement
          *
@@ -140,18 +146,18 @@ namespace DatabaseFactory {
             if ($params) {
                 // prepare the statement
                 $statement = $this->prepare($this->toSQL());
-
+                
                 // execute the prepared statement
                 $statement->execute($params);
-
+                
                 /// unset the query and the prepared statement
                 unset($statement, $this->query);
             }
-
+            
             // without binding parameters to a prepared statement
             return $this->query($this->toSQL());
         }
-
+        
         /**
          * Generates a prepared PDO statement
          * using a trimmed query string
@@ -164,7 +170,7 @@ namespace DatabaseFactory {
         {
             return $this->connection->prepare(trim($query));
         }
-
+        
         /**
          * Generates a PDO query
          *
@@ -176,7 +182,7 @@ namespace DatabaseFactory {
         {
             return $this->connection->query(trim($query));
         }
-
+        
         /**
          * Close the PDO connection
          *
@@ -186,7 +192,7 @@ namespace DatabaseFactory {
         {
             unset($this->query, $this->connection);
         }
-
+        
         /**
          * Return the results as an array
          *
@@ -196,7 +202,7 @@ namespace DatabaseFactory {
         {
             return $this->execute()->fetchAll(\PDO::FETCH_ASSOC);
         }
-
+        
         /**
          * Wrapper for $this->get()
          *
@@ -210,7 +216,7 @@ namespace DatabaseFactory {
         {
             return (new Collections\ToArray($this->get()))->collection();
         }
-
+        
         /**
          * Return the results as a JSON string
          *
@@ -222,10 +228,11 @@ namespace DatabaseFactory {
         public function toJSON(): string|false
         {
             return json_encode(
-               (new Collections\ToJSON($this->get())), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT
+                (new Collections\ToJSON($this->get())),
+                JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT
             );
         }
-
+        
         /**
          * Returns the trimmed string value of
          * $query
@@ -238,7 +245,7 @@ namespace DatabaseFactory {
         {
             return trim($this->query);
         }
-
+        
         /**
          * __toString() implementation
          *
@@ -250,7 +257,7 @@ namespace DatabaseFactory {
         {
             return $this->toSQL();
         }
-
+        
         /**
          * Destructor
          *
