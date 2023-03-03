@@ -101,8 +101,7 @@ namespace DatabaseFactory {
             if (Helpers\Arr::hasKey($module, $this->modules)) {
                 $currentModule = $this->modules[$module] = $config->modules()[$module];
             } elseif (Helpers\Arr::hasKey($module, $config->modules())) {
-                $this->modules = [];
-                $currentModule = $this->modules[$module] = $config->modules()[$module];
+	            $currentModule = $this->modules['config'][$module] = $config->modules()[$module];
             } else {
                 // if not, let's throw an error
                 throw new Exceptions\InvalidModuleException(
