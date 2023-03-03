@@ -16,7 +16,7 @@ namespace DatabaseFactory\ORM {
      */
     trait HasJoin
     {
-        public static function join(string $table, array $on, string $columns = '*')
+        public static function join(string $table, array $on, string $columns = '*'): array
         {
             return DB::table(static::table())->join($table, $on, $columns)->toArray();
         }

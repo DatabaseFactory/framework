@@ -18,7 +18,7 @@ namespace DatabaseFactory\ORM {
      */
     trait HasFirst
     {
-        public static function first(string $columns = '*')
+        public static function first(string $columns = '*'): array
         {
             return DB::table(static::table())->select($columns)->orderBy('id', 'ASC')->limit(1);
         }

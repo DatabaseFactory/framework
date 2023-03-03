@@ -17,7 +17,7 @@ namespace DatabaseFactory\ORM {
      */
     trait HasNot
     {
-        public static function whereNot($key = null, $value = null, string $columns = '*')
+        public static function whereNot($key = null, $value = null, string $columns = '*'): array
         {
             return DB::table(static::table())->select($columns)->whereNot($key, $value)->toArray();
         }

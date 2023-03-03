@@ -18,7 +18,7 @@ namespace DatabaseFactory\ORM {
      */
     trait HasWhere
     {
-        public static function where($key, $is = null, $value = null, string $columns = '*')
+        public static function where($key, $is = null, $value = null, string $columns = '*'): array
         {
             return DB::table(static::table())->select($columns)->where($key, $is, $value)->toArray();
         }
