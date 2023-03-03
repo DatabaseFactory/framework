@@ -18,7 +18,7 @@ namespace DatabaseFactory\ORM {
     {
         public static function join(string $table, array $on, string $columns = '*')
         {
-            return DB::table(static::table())->join($table, $on, $columns);
+            return DB::table(static::table())->join($table, $on, $columns)->toArray();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace DatabaseFactory\ORM {
     {
         public static function whereNot($key = null, $value = null, string $columns = '*')
         {
-            return DB::table(static::table())->select($columns)->whereNot($key, $value);
+            return DB::table(static::table())->select($columns)->whereNot($key, $value)->toArray();
         }
     }
 }

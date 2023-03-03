@@ -20,7 +20,7 @@ namespace DatabaseFactory\ORM {
     {
         public static function where($key, $is = null, $value = null, string $columns = '*')
         {
-            return DB::table(static::table())->select($columns)->where($key, $is, $value);
+            return DB::table(static::table())->select($columns)->where($key, $is, $value)->toArray();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace DatabaseFactory\ORM {
     {
         public static function like(string $field, string $pattern, string $columns = '*'): Builder
         {
-            return DB::table(static::table())->select($columns)->like($field, $pattern);
+            return DB::table(static::table())->select($columns)->like($field, $pattern)->toArray();
         }
     }
 }

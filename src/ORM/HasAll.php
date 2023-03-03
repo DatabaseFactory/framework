@@ -19,7 +19,7 @@ namespace DatabaseFactory\ORM {
     {
         public static function all(string $columns = '*'): Builder
         {
-            return Facades\DB::table(static::table())->select($columns);
+            return Facades\DB::table(static::table())->select($columns)->toArray();
         }
     }
 }

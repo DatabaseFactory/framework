@@ -18,7 +18,7 @@ namespace DatabaseFactory\ORM {
     {
         public static function find(int $id, string $columns = '*')
         {
-            return DB::table(static::table())->select($columns)->where('id', '=', $id);
+            return DB::table(static::table())->select($columns)->where('id', '=', $id)->toArray();
         }
     }
 }

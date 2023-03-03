@@ -20,7 +20,7 @@ namespace DatabaseFactory\ORM {
     {
         public static function first(string $columns = '*')
         {
-            return DB::table(static::table())->select($columns)->orderBy('id', 'ASC')->limit(1)->toArray();
+            return DB::table(static::table())->select($columns)->orderBy('id', 'ASC')->limit(1);
         }
     }
 }
