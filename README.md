@@ -11,6 +11,11 @@ for production use.
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|----------------------------------------------------------------|
 | [![Build Status](https://app.travis-ci.com/jason-napolitano/DatabaseFactory.svg?branch=master)](https://app.travis-ci.com/jason-napolitano/DatabaseFactory) | [View Here](https://databasefactory.github.io/framework/) | [View Here](https://github.com/DatabaseFactory/framework/wiki) |
 
+
+```bash
+$ composer require database-factory/framework
+```
+
 ### License
 
 &copy; 2023 - **DatabaseFactory** and all related components are released under
