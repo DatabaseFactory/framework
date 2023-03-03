@@ -18,7 +18,7 @@ namespace DatabaseFactory\ORM {
      */
     trait HasLast
     {
-        public static function last(string $columns = '*')
+        public static function last(string $columns = '*'): array
         {
             return DB::table(static::table())->select($columns)->orderBy('id', 'DESC')->limit(1)->toArray();
         }

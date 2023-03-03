@@ -16,7 +16,7 @@ namespace DatabaseFactory\ORM {
      */
     trait HasFind
     {
-        public static function find(int $id, string $columns = '*')
+        public static function find(int $id, string $columns = '*'): array
         {
             return DB::table(static::table())->select($columns)->where('id', '=', $id)->toArray();
         }
