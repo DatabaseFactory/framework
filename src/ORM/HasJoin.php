@@ -1,8 +1,9 @@
 <?php
 
 namespace DatabaseFactory\ORM {
-
-    use DatabaseFactory\Facades\DB;
+	
+	use DatabaseFactory\Builder;
+	use DatabaseFactory\Facades\DB;
 
     /**
      * Allows an entity the ability to join tables
@@ -16,9 +17,9 @@ namespace DatabaseFactory\ORM {
      */
     trait HasJoin
     {
-        public static function join(string $table, array $on, string $columns = '*'): array
+        public static function join(string $table, array $on, string $columns = '*'): Builder
         {
-            return DB::table(static::table())->join($table, $on, $columns)->toArray();
+            return DB::table(static::table())->join($table, $on, $columns);
         }
     }
 }

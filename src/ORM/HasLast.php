@@ -1,8 +1,9 @@
 <?php
 
 namespace DatabaseFactory\ORM {
-
-    use DatabaseFactory\Facades\DB;
+	
+	use DatabaseFactory\Builder;
+	use DatabaseFactory\Facades\DB;
 
 
     /**
@@ -18,9 +19,9 @@ namespace DatabaseFactory\ORM {
      */
     trait HasLast
     {
-        public static function last(string $columns = '*'): array
+        public static function last(string $columns = '*'): Builder
         {
-            return DB::table(static::table())->select($columns)->orderBy('id', 'DESC')->limit(1)->toArray();
+            return DB::table(static::table())->select($columns)->orderBy('id', 'DESC')->limit(1);
         }
     }
 }

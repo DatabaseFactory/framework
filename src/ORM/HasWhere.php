@@ -1,8 +1,9 @@
 <?php
 
 namespace DatabaseFactory\ORM {
-
-    use DatabaseFactory\Facades\DB;
+	
+	use DatabaseFactory\Builder;
+	use DatabaseFactory\Facades\DB;
 
 
     /**
@@ -18,9 +19,9 @@ namespace DatabaseFactory\ORM {
      */
     trait HasWhere
     {
-        public static function where($key, $is = null, $value = null, string $columns = '*'): array
+        public static function where($key, $is = null, $value = null, string $columns = '*'): Builder
         {
-            return DB::table(static::table())->select($columns)->where($key, $is, $value)->toArray();
+            return DB::table(static::table())->select($columns)->where($key, $is, $value);
         }
     }
 }

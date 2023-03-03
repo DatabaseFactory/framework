@@ -18,9 +18,9 @@ namespace DatabaseFactory\ORM {
      */
     trait HasLike
     {
-        public static function like(string $field, string $pattern, string $columns = '*'): array
+        public static function like(string $field, string $pattern, string $columns = '*'): Builder
         {
-            return DB::table(static::table())->select($columns)->like($field, $pattern)->toArray();
+            return DB::table(static::table())->select($columns)->like($field, $pattern);
         }
     }
 }

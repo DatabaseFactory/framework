@@ -1,8 +1,9 @@
 <?php
 
 namespace DatabaseFactory\ORM {
-
-    use DatabaseFactory\Facades\DB;
+	
+	use DatabaseFactory\Builder;
+	use DatabaseFactory\Facades\DB;
 
 
     /**
@@ -18,7 +19,7 @@ namespace DatabaseFactory\ORM {
      */
     trait HasFirst
     {
-        public static function first(string $columns = '*'): array
+        public static function first(string $columns = '*'): Builder
         {
             return DB::table(static::table())->select($columns)->orderBy('id', 'ASC')->limit(1);
         }
