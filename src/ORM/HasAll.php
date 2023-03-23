@@ -2,8 +2,8 @@
 
 namespace DatabaseFactory\ORM {
 
-    use DatabaseFactory\Builder;
     use DatabaseFactory\Facades;
+    use DatabaseFactory\Builder;
 
     /**
      * Allows an entity the ability to return all records

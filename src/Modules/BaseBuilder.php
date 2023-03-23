@@ -1,6 +1,6 @@
 <?php
 
-namespace DatabaseFactory\Config {
+namespace DatabaseFactory\Modules {
 
     use DatabaseFactory\Helpers;
     use DatabaseFactory\Contracts;
@@ -63,7 +63,6 @@ namespace DatabaseFactory\Config {
         protected const OUTER = ' OUTER';
         protected const INNER = ' INNER';
 
-
         /**
          * Strip a string of quotes
          *
@@ -104,37 +103,26 @@ namespace DatabaseFactory\Config {
          * Increment a value
          *
          * @param int $value
+         * @param int $by
          *
          * @return int
          */
-        protected static function increment(int $value = 0): int
+        protected static function inc(int $value = 0, int $by = 1): int
         {
-            return $value + self::ONE;
+            return $value + $by;
         }
 
         /**
          * Decrement a value
          *
          * @param int $value
+         * @param int $by
          *
          * @return int
          */
-        protected static function decrement(int $value = 0): int
+        protected static function dec(int $value = 0, int $by = 1): int
         {
-            return $value - self::ONE;
-        }
-
-        /**
-         * Implement FIND_IN_SET(...)
-         *
-         * @param string $field
-         * @param mixed  $value
-         *
-         * @return string
-         */
-        public static function contains(string $field, $value): string
-        {
-            return self::WHERE . 'find_in_set' . self::OPPAR . self::SGLQT . $value . self::SGLQT . self::SEPARATOR . $field . self::CLPAR > 0;
+            return $value - $by;
         }
 
         /**
@@ -144,16 +132,16 @@ namespace DatabaseFactory\Config {
          *
          * @return string
          */
-        public static function where(string $columns): string
+        public static function where(string $column, string $operator, mixed $value): string
         {
-            return static::WHERE . $columns;
+            return static::WHERE . $column . self::SPC . $operator . self::SPC . self::singleQuote($value);
         }
 
         /**
          * Implement LIKE
          *
          * @param string $pattern
-         * @param bool   $not 
+         * @param bool   $not
          *
          * @return string
          */
@@ -167,7 +155,7 @@ namespace DatabaseFactory\Config {
          * Implement SELECT
          *
          * @param string $columns
-         * @param bool   $space 
+         * @param bool   $space
          *
          * @return string
          */
@@ -192,13 +180,13 @@ namespace DatabaseFactory\Config {
         /**
          * Implement OFFSET
          *
-         * @param int $rows
+         * @param int $count
          *
          * @return string
          */
-        public static function offset(int $rows): string
+        public static function offset(int $count = 0): string
         {
-            return self::OFFSET . self::SPC . $rows;
+            return self::OFFSET . self::SPC . $count;
         }
 
         /**
@@ -259,12 +247,17 @@ namespace DatabaseFactory\Config {
          *
          * @param string $params
          * @param array  $on
+         * @param string $type
          *
          * @return string
          */
-        public static function join(string $params, array $on): string
+        public static function join(string $params, array $on, string $type = self::EMPTY): string
         {
-            return static::SPC . static::JOIN . $params . self::ON . rtrim(implode(self::EQUALS, $on), self::EQUALS);
+            $type = $type === '' ? self::JOIN : self::SPC . $type . self::SPC . self::JOIN;
+            return self::SPC . $type . $params . self::ON . rtrim(
+                implode(self::EQUALS, $on),
+                self::EQUALS
+            );
         }
     }
 }

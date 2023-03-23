@@ -1,9 +1,9 @@
 <?php
 
 namespace DatabaseFactory\ORM {
-	
-	use DatabaseFactory\Builder;
-	use DatabaseFactory\Facades\DB;
+
+    use DatabaseFactory\Builder;
+    use DatabaseFactory\Facades;
 
     /**
      * Allows an entity the ability to return one record
@@ -19,7 +19,7 @@ namespace DatabaseFactory\ORM {
     {
         public static function find(int $id, string $columns = '*'): Builder
         {
-            return DB::table(static::table())->select($columns)->where('id', '=', $id);
+            return Facades\DB::table(static::table())->select($columns)->where('id', '=', $id);
         }
     }
 }

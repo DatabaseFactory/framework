@@ -4,8 +4,10 @@
 > to securely and efficiently interact with, manage and manipulate their databases with a simple,
 > and intuitive API.
 
-Please note that this library is still in heavy development stages and is **not yet ready**
-for production use.
+Please take note that this project is a proof of concept. I am toying with the idea of building a
+versatile Query Builder and ORM that fits the basic needs of small applications. It is not production
+ready, if it will be. We'll see where it, and how goes. If it develops into something really cool and
+useful, that'd be awesome!
 
 | Travis                                                                                                                                                      | API Docs                                                  | Wiki Pages                                                     |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|----------------------------------------------------------------|

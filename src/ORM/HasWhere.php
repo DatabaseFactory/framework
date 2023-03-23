@@ -1,9 +1,9 @@
 <?php
 
 namespace DatabaseFactory\ORM {
-	
-	use DatabaseFactory\Builder;
-	use DatabaseFactory\Facades\DB;
+
+    use DatabaseFactory\Builder;
+    use DatabaseFactory\Facades;
 
 
     /**
@@ -21,7 +21,7 @@ namespace DatabaseFactory\ORM {
     {
         public static function where($key, $is = null, $value = null, string $columns = '*'): Builder
         {
-            return DB::table(static::table())->select($columns)->where($key, $is, $value);
+            return Facades\DB::table(static::table())->select($columns)->where($key, $is, $value);
         }
     }
 }

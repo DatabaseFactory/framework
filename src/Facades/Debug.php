@@ -1,6 +1,6 @@
 <?php
 
-namespace DatabaseFactory\Helpers {
+namespace DatabaseFactory\Facades {
 
     use DatabaseFactory\Libraries;
 

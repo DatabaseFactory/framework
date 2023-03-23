@@ -1,9 +1,9 @@
 <?php
 
-namespace DatabaseFactory\Modules {
+namespace DatabaseFactory\Modules\MySQL {
 
     use DatabaseFactory\Contracts;
-    use DatabaseFactory\Config;
+    use DatabaseFactory\Modules\BaseBuilder;
 
     /**
      * SQL LIMIT
@@ -15,7 +15,7 @@ namespace DatabaseFactory\Modules {
      * @since   1.0.0
      * @license MIT <https://mit-license.org>
      */
-    class Limit extends Config\BaseBuilder implements Contracts\SQLStatementInterface
+    class Limit extends BaseBuilder implements Contracts\SQLStatementInterface
     {
         /**
          * @inheritDoc
