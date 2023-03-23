@@ -1,12 +1,12 @@
 <?php
 
 namespace DatabaseFactory {
-    
+
     use DatabaseFactory\Helpers;
     use DatabaseFactory\Facades;
+    use DatabaseFactory\Contracts;
     use DatabaseFactory\Exceptions;
-    use DatabaseFactory\Collections;
-    
+
     /**
      * The main Query Builder class. Objects initialized from this
      * class are responsible for building queries and handling the
@@ -18,6 +18,25 @@ namespace DatabaseFactory {
      * @version 1.0.0
      * @since   1.0.0
      * @license MIT <https://mit-license.org>
+     *
+     * @method join(string $table, array $on, string $columns = '*'): self
+     * @method where(string $key, string $is, mixed $value): self
+     * @method whereNot(string $column, mixed $value): self
+     * @method andLike(string $column, mixed $value): self
+     * @method notLike(string $column, mixed $value): self
+     * @method orLike(string $column, mixed $value): self
+     * @method like(string $column, mixed $value): self
+     * @method and(string $column, mixed $value): self
+     * @method or(string $column, mixed $value): self
+     * @method select(string $columns = '*'): self
+     * @method groupBy(string $column): self
+     * @method orderBy(string $column): self
+     * @method update(array $data): self
+     * @method insert(array $data): self
+     * @method delete(int $id): self
+     * @method offset(int $id): self
+     * @method count(int $x): self
+     * @method limit(int $x): self
      */
     class Builder
     {
@@ -27,20 +46,20 @@ namespace DatabaseFactory {
          * @var string|null $query
          */
         private ?string $query = '';
-        
+
         /**
          * PDO Connection
          *
          * @var \PDO $connection
          */
         private \PDO $connection;
-        
+
         /**
          * Module collection
          *
          * @var array $modules
          *
-         * @see \DatabaseFactory\Config\BaseConfig::$modules
+         * @see \DatabaseFactory\Config::$modules
          */
         private array $modules = [
             'whereNot' => null,
@@ -52,7 +71,6 @@ namespace DatabaseFactory {
             'delete'   => null,
             'insert'   => null,
             'offset'   => null,
-            'custom'   => null,
             'select'   => null,
             'orLike'   => null,
             'count'    => null,
@@ -63,7 +81,7 @@ namespace DatabaseFactory {
             'and'      => null,
             'or'       => null,
         ];
-        
+
         /**
          * Constructor
          *
@@ -75,7 +93,7 @@ namespace DatabaseFactory {
             // connection string
             $this->connection = Facades\DB::connection();
         }
-        
+
         /**
          * Check to see if the module used for a query exists within the
          * $modules array, extends the correct class, and implements the
@@ -93,44 +111,40 @@ namespace DatabaseFactory {
          */
         public function __call(string $module = null, mixed $arguments = null): Builder
         {
-            $currentModule = null;
-            $config = new $this->config();
-            
             // let's ensure that the $name passed through lives within
-            // the $modules arrays
-            if (Helpers\Arr::hasKey($module, $this->modules)) {
-                $currentModule = $this->modules[$module] = $config->modules()[$module];
-            } elseif (Helpers\Arr::hasKey($module, $config->modules())) {
-	            $currentModule = $this->modules['config'][$module] = $config->modules()[$module];
-            } else {
+            // the $modules array
+            if (!Helpers\Arr::hasKey($module, $this->modules)) {
                 // if not, let's throw an error
                 throw new Exceptions\InvalidModuleException(
                     $module . ' must exist within the $modules array'
                 );
             }
-            
+
+            // if it does, let's set it as the current module
+            $currentModule = $this->modules[$module] = (new $this->config())->modules()[$module];
+
             // let's see if that module extends the base builder
-            if (!Helpers\Cls::extends($currentModule, Config\BaseBuilder::class)) {
+            if (!Helpers\Cls::extends($currentModule, Modules\BaseBuilder::class)) {
                 throw new Exceptions\InvalidModuleException(
-                    $module . ' module must extend ' . Config\BaseBuilder::class
+                    $module . ' module must extend ' . Modules\BaseBuilder::class
                 );
             }
-            
+
             // let's see if it also conforms to the correct contract
             if (!Helpers\Cls::implements($currentModule, Contracts\SQLStatementInterface::class)) {
                 throw new Exceptions\InvalidModuleException(
                     $module . ' must implement ' . Contracts\SQLStatementInterface::class
                 );
             }
-            
+
             // generate the query returned and assign it to $query
             // for execution
             $this->query .= (new $currentModule())->statement($this->table, ...$arguments);
-            
+
             // allow for method chaining of queries
             return $this;
         }
-        
+
         /**
          * Execute a query and return a PDOStatement
          *
@@ -141,22 +155,16 @@ namespace DatabaseFactory {
          */
         public function execute(array $params = null): \PDOStatement
         {
-            // binding parameters to a prepared statement
-            if ($params) {
-                // prepare the statement
-                $statement = $this->prepare($this->toSQL());
-                
-                // execute the prepared statement
-                $statement->execute($params);
-                
-                /// unset the query and the prepared statement
-                unset($statement, $this->query);
-            }
-            
-            // without binding parameters to a prepared statement
-            return $this->query($this->toSQL());
+            // prepare the statement
+            $statement = $this->prepare(trim($this->query));
+
+            // execute the prepared statement
+            $statement->execute($params);
+
+            // return the PDOStatement
+            return $statement;
         }
-        
+
         /**
          * Generates a prepared PDO statement
          * using a trimmed query string
@@ -169,19 +177,17 @@ namespace DatabaseFactory {
         {
             return $this->connection->prepare(trim($query));
         }
-        
+
         /**
-         * Generates a PDO query
+         * Return the results
          *
-         * @param string $query
-         *
-         * @return \PDOStatement|false
+         * @return array|null
          */
-        private function query(string $query): \PDOStatement|false
+        public function get(): ?array
         {
-            return $this->connection->query(trim($query));
+            return $this->execute()->fetchAll(\PDO::FETCH_ASSOC);
         }
-        
+
         /**
          * Close the PDO connection
          *
@@ -191,72 +197,7 @@ namespace DatabaseFactory {
         {
             unset($this->query, $this->connection);
         }
-        
-        /**
-         * Return the results as an array
-         *
-         * @return array|null
-         */
-        private function get(): ?array
-        {
-            return $this->execute()->fetchAll(\PDO::FETCH_ASSOC);
-        }
-        
-        /**
-         * Wrapper for $this->get()
-         *
-         * @return array
-         *
-         * @see \DatabaseFactory\Collections\ToArray::collection()
-         * @see \DatabaseFactory\Builder::get()
-         *
-         */
-        public function toArray(): array
-        {
-            return (new Collections\ToArray($this->get()))->collection();
-        }
-        
-        /**
-         * Return the results as a JSON string
-         *
-         * @return string|false
-         *
-         * @see \DatabaseFactory\Collections\ToJSON::jsonSerialize()
-         * @see \DatabaseFactory\Builder::get()
-         */
-        public function toJSON(): string|false
-        {
-            return json_encode(
-                (new Collections\ToJSON($this->get())),
-                JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT
-            );
-        }
-        
-        /**
-         * Returns the trimmed string value of
-         * $query
-         *
-         * @return string
-         *
-         * @see \DatabaseFactory\Builder::$query
-         */
-        public function toSQL(): string
-        {
-            return trim($this->query);
-        }
-        
-        /**
-         * __toString() implementation
-         *
-         * @return string
-         *
-         * @see \DatabaseFactory\Builder::toSQL()
-         */
-        public function __toString(): string
-        {
-            return $this->toSQL();
-        }
-        
+
         /**
          * Destructor
          *

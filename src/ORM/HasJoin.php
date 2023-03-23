@@ -1,9 +1,9 @@
 <?php
 
 namespace DatabaseFactory\ORM {
-	
-	use DatabaseFactory\Builder;
-	use DatabaseFactory\Facades\DB;
+
+    use DatabaseFactory\Builder;
+    use DatabaseFactory\Facades;
 
     /**
      * Allows an entity the ability to join tables
@@ -19,7 +19,7 @@ namespace DatabaseFactory\ORM {
     {
         public static function join(string $table, array $on, string $columns = '*'): Builder
         {
-            return DB::table(static::table())->join($table, $on, $columns);
+            return Facades\DB::table(static::table())->join($table, $on, $columns);
         }
     }
 }

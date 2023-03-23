@@ -1,12 +1,12 @@
 <?php
 
-namespace DatabaseFactory\Modules {
+namespace DatabaseFactory\Modules\MySQL {
 
     use DatabaseFactory\Contracts;
-    use DatabaseFactory\Config;
+    use DatabaseFactory\Modules\BaseBuilder;
 
     /**
-     * SQL SELECT
+     * SQL ORDER BY
      *
      * @package DatabaseFactory\Modules
      * @author  Jason Napolitano
@@ -15,14 +15,14 @@ namespace DatabaseFactory\Modules {
      * @since   1.0.0
      * @license MIT <https://mit-license.org>
      */
-    class Select extends Config\BaseBuilder implements Contracts\SQLStatementInterface
+    class OrderBy extends BaseBuilder implements Contracts\SQLStatementInterface
     {
         /**
          * @inheritDoc
          */
         public function statement(string $table, ...$params): string
         {
-            return self::select($params[0] ? : '*') . self::from($table);
+            return static::ORDER_BY . $params[0] . static::SPC . $params[1] ?? static::ASC;
         }
     }
 }

@@ -7,7 +7,7 @@
   "version": "0.0.1",
   "require": {
     "ext-pdo": "*",
-    "php": "^8.1"
+    "php": "^8.2"
   },
   "require-dev": {
     "ext-curl": "*",
@@ -24,6 +24,7 @@
     "optimize-autoloader": true
   },
   "autoload": {
+    "files": [ "src/Helper.php" ],
     "psr-4": {
       "DatabaseFactory\\": "src",
       "Tests\\": "tests"

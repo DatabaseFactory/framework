@@ -3,9 +3,9 @@
 namespace DatabaseFactory\Facades {
 
     use DatabaseFactory\Config;
+    use DatabaseFactory\Connect;
     use DatabaseFactory\Helpers;
     use DatabaseFactory\Builder;
-    use DatabaseFactory\Connect;
     use DatabaseFactory\Contracts;
     use DatabaseFactory\Exceptions;
 
@@ -50,9 +50,9 @@ namespace DatabaseFactory\Facades {
          * @param string $table  Database table
          * @param string $config Config class
          *
-         * @return Builder
+         * @return \DatabaseFactory\Builder
          */
-        public static function table(string $table, string $config = Config\BaseConfig::class): Builder
+        public static function table(string $table, string $config = \DatabaseFactory\Config::class): Builder
         {
             // does the config class implement the BaseConfigInterface?
             if (!Helpers\Cls::implements($config, Contracts\BaseConfigInterface::class)) {
@@ -64,12 +64,12 @@ namespace DatabaseFactory\Facades {
 
             // next, does it extend the BaseConfig class?
             if (
-                !Helpers\Cls::equals($config, Config\BaseConfig::class) &&
-                !Helpers\Cls::extends($config, Config\BaseConfig::class)
+                !Helpers\Cls::equals($config, \DatabaseFactory\Config::class) &&
+                !Helpers\Cls::extends($config, \DatabaseFactory\Config::class)
             ) {
                 // if not, throw a new QueryBuilderException
                 throw new Exceptions\QueryBuilderException(
-                    'The config file must extend ' . Config\BaseConfig::class
+                    'The config file must extend ' . \DatabaseFactory\Config::class
                 );
             }
 

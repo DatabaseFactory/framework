@@ -1,12 +1,12 @@
 <?php
 
-namespace DatabaseFactory\Modules {
+namespace DatabaseFactory\Modules\MySQL {
 
     use DatabaseFactory\Contracts;
-    use DatabaseFactory\Config;
+    use DatabaseFactory\Modules\BaseBuilder;
 
     /**
-     * SQL COUNT
+     * SQL JOIN
      *
      * @package DatabaseFactory\Modules
      * @author  Jason Napolitano
@@ -15,14 +15,17 @@ namespace DatabaseFactory\Modules {
      * @since   1.0.0
      * @license MIT <https://mit-license.org>
      */
-    class Count extends Config\BaseBuilder implements Contracts\SQLStatementInterface
+    class Join extends BaseBuilder implements Contracts\SQLStatementInterface
     {
         /**
          * @inheritDoc
          */
         public function statement(string $table, ...$params): string
         {
-            return self::select($params[0]) . self::count() . self::from($table);
+            return
+                static::select($params[2] ?? '*') .
+                static::from($table) .
+                static::join($params[0], $params[1], $params[3] ?? self::EMPTY);
         }
     }
 }

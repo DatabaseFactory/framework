@@ -1,12 +1,12 @@
 <?php
 
-namespace DatabaseFactory\Modules {
+namespace DatabaseFactory\Modules\MySQL {
 
     use DatabaseFactory\Contracts;
-    use DatabaseFactory\Config;
+    use DatabaseFactory\Modules\BaseBuilder;
 
     /**
-     * SQL OR
+     * SQL LIKE
      *
      * @package DatabaseFactory\Modules
      * @author  Jason Napolitano
@@ -15,14 +15,16 @@ namespace DatabaseFactory\Modules {
      * @since   1.0.0
      * @license MIT <https://mit-license.org>
      */
-    class OrWhere extends Config\BaseBuilder implements Contracts\SQLStatementInterface
+    class Like extends BaseBuilder implements Contracts\SQLStatementInterface
     {
         /**
          * @inheritDoc
          */
         public function statement(string $table, ...$params): string
         {
-            return static::OR . $table . static::PRD . $params[0] . static::SPC . $params[1] . static::SPC . static::SGLQT . $params[2] . static::SGLQT;
+            return
+                self::where($table, $params[0]) .
+                static::like($params[1]);
         }
     }
 }

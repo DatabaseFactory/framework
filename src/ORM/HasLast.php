@@ -1,9 +1,9 @@
 <?php
 
 namespace DatabaseFactory\ORM {
-	
-	use DatabaseFactory\Builder;
-	use DatabaseFactory\Facades\DB;
+
+    use DatabaseFactory\Builder;
+    use DatabaseFactory\Facades;
 
 
     /**
@@ -21,7 +21,7 @@ namespace DatabaseFactory\ORM {
     {
         public static function last(string $columns = '*'): Builder
         {
-            return DB::table(static::table())->select($columns)->orderBy('id', 'DESC')->limit(1);
+            return Facades\DB::table(static::table())->select($columns)->orderBy('id', 'DESC')->limit(1);
         }
     }
 }

@@ -4,7 +4,6 @@ namespace DatabaseFactory {
 
     use ReflectionClass;
     use ReflectionProperty;
-    use DatabaseFactory\ORM;
     use DatabaseFactory\Facades;
 
     /**
@@ -21,8 +20,7 @@ namespace DatabaseFactory {
     class Entity
     {
         // ORM Plugins
-        use ORM\HasConfig;
-        use ORM\HasTable;
+        use \DatabaseFactory\ORM\HasTable;
 
         /**
          * ID of a record for updating
@@ -34,7 +32,7 @@ namespace DatabaseFactory {
         /**
          * Constructor
          *
-         * @param int $id Pass an ID to update a record
+         * @param int|null $id Pass an ID to update a record
          */
         public function __construct(int $id = null)
         {

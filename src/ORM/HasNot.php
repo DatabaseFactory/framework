@@ -1,9 +1,9 @@
 <?php
 
 namespace DatabaseFactory\ORM {
-	
-	use DatabaseFactory\Builder;
-	use DatabaseFactory\Facades\DB;
+
+    use DatabaseFactory\Builder;
+    use DatabaseFactory\Facades;
 
     /**
      * Allows an entity the ability to return records
@@ -20,7 +20,7 @@ namespace DatabaseFactory\ORM {
     {
         public static function whereNot($key = null, $value = null, string $columns = '*'): Builder
         {
-            return DB::table(static::table())->select($columns)->whereNot($key, $value);
+            return Facades\DB::table(static::table())->select($columns)->whereNot($key, $value);
         }
     }
 }

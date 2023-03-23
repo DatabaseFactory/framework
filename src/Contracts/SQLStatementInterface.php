@@ -3,7 +3,7 @@
 namespace DatabaseFactory\Contracts {
 
     /**
-     * Contract for the custom SQL modules
+     * Contract for custom Builder modules
      *
      * @package DatabaseFactory\Contracts
      * @author  Jason Napolitano
