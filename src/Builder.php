@@ -156,7 +156,7 @@ namespace DatabaseFactory {
 		public function execute(array $params = null): \PDOStatement
 		{
 			// prepare the statement
-			$statement = $this->prepare(trim($this->query));
+			$statement = $this->prepare($this->query);
 			
 			// execute the prepared statement
 			$statement->execute($params);
@@ -185,8 +185,7 @@ namespace DatabaseFactory {
 		 */
 		public function get(): ?array
 		{
-			$results = $this->execute()->fetchAll(\PDO::FETCH_ASSOC);
-			return $this->query !== '' ? $results : [];
+			return $this->query !== '' ? $this->execute()->fetchAll(\PDO::FETCH_ASSOC) : [];
 		}
 		
 		/**
