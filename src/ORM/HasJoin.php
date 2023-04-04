@@ -17,9 +17,9 @@ namespace DatabaseFactory\ORM {
      */
     trait HasJoin
     {
-        public static function join(string $table, array $on, string $columns = '*'): Builder
+        public static function join(string $table, array $on, string $columns = '*')
         {
-            return Facades\DB::table(static::table())->join($table, $on, $columns);
+            return Facades\DB::table(static::table())->join($table, $on, $columns)->get();
         }
     }
 }

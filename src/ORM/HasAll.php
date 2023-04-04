@@ -17,9 +17,9 @@ namespace DatabaseFactory\ORM {
      */
     trait HasAll
     {
-        public static function all(string $columns = '*'): Builder
+        public static function all(string $columns = '*')
         {
-            return Facades\DB::table(static::table())->select($columns);
+            return Facades\DB::table(static::table())->select($columns)->get();
         }
     }
 }
