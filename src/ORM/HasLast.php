@@ -19,9 +19,9 @@ namespace DatabaseFactory\ORM {
      */
     trait HasLast
     {
-        public static function last(string $columns = '*'): Builder
+        public static function last(string $columns = '*')
         {
-            return Facades\DB::table(static::table())->select($columns)->orderBy('id', 'DESC')->limit(1);
+            return Facades\DB::table(static::table())->select($columns)->orderBy('id', 'DESC')->limit(1)->get();
         }
     }
 }

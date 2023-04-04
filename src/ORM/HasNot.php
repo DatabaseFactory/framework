@@ -18,9 +18,9 @@ namespace DatabaseFactory\ORM {
      */
     trait HasNot
     {
-        public static function whereNot($key = null, $value = null, string $columns = '*'): Builder
+        public static function whereNot($key = null, $value = null, string $columns = '*')
         {
-            return Facades\DB::table(static::table())->select($columns)->whereNot($key, $value);
+            return Facades\DB::table(static::table())->select($columns)->whereNot($key, $value)->get();
         }
     }
 }

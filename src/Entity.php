@@ -4,7 +4,8 @@ namespace DatabaseFactory {
 
     use ReflectionClass;
     use ReflectionProperty;
-    use DatabaseFactory\Facades;
+	use DatabaseFactory\ORM;
+	use DatabaseFactory\Facades;
 
     /**
      * The base entity class
@@ -20,7 +21,8 @@ namespace DatabaseFactory {
     class Entity
     {
         // ORM Plugins
-        use \DatabaseFactory\ORM\HasTable;
+        use ORM\HasTable;
+        use ORM\HasQuery;
 
         /**
          * ID of a record for updating

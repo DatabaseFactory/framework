@@ -17,9 +17,9 @@ namespace DatabaseFactory\ORM {
      */
     trait HasFind
     {
-        public static function find(int $id, string $columns = '*'): Builder
+        public static function find(int|string $value, string $by = 'id', string $columns = '*')
         {
-            return Facades\DB::table(static::table())->select($columns)->where('id', '=', $id);
+            return Facades\DB::table(static::table())->select($columns)->where($by, '=', $value)->get();
         }
     }
 }

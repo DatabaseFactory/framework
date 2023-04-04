@@ -19,9 +19,9 @@ namespace DatabaseFactory\ORM {
      */
     trait HasFirst
     {
-        public static function first(string $columns = '*'): Builder
+        public static function first(string $columns = '*')
         {
-            return Facades\DB::table(static::table())->select($columns)->orderBy('id', 'ASC')->limit(1);
+            return Facades\DB::table(static::table())->select($columns)->orderBy('id', 'ASC')->limit(1)->get();
         }
     }
 }

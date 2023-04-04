@@ -19,9 +19,9 @@ namespace DatabaseFactory\ORM {
      */
     trait HasWhere
     {
-        public static function where($key, $is = null, $value = null, string $columns = '*'): Builder
+        public static function where($key, $is = null, $value = null, string $columns = '*')
         {
-            return Facades\DB::table(static::table())->select($columns)->where($key, $is, $value);
+            return Facades\DB::table(static::table())->select($columns)->where($key, $is, $value)->get();
         }
     }
 }
