@@ -64,27 +64,8 @@ namespace DatabaseFactory\Facades {
          *
          * @return \DatabaseFactory\Builder
          */
-        public static function table(string $table, string $config = \DatabaseFactory\Config::class): Builder
+        public static function table(string $table, Contracts\BaseConfigInterface $config): Builder
         {
-            // does the config class implement the BaseConfigInterface?
-            if (!Helpers\Cls::implements($config, Contracts\BaseConfigInterface::class)) {
-                // if not, throw a new QueryBuilderException
-                throw new Exceptions\QueryBuilderException(
-                    'The config file must implement ' . Contracts\BaseConfigInterface::class
-                );
-            }
-
-            // next, does it extend the BaseConfig class?
-            if (
-                !Helpers\Cls::equals($config, \DatabaseFactory\Config::class) &&
-                !Helpers\Cls::extends($config, \DatabaseFactory\Config::class)
-            ) {
-                // if not, throw a new QueryBuilderException
-                throw new Exceptions\QueryBuilderException(
-                    'The config file must extend ' . \DatabaseFactory\Config::class
-                );
-            }
-
             // if validation passes, return a new query builder instance
             return (new Builder($table, $config));
         }
