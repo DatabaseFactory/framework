@@ -2,10 +2,10 @@
 
 namespace DatabaseFactory {
 
-    use DatabaseFactory\Helpers;
-    use DatabaseFactory\Facades;
-    use DatabaseFactory\Contracts;
-    use DatabaseFactory\Exceptions;
+	use DatabaseFactory\Exceptions;
+	use DatabaseFactory\Contracts;
+	use DatabaseFactory\Helpers;
+	use DatabaseFactory\Facades;
 
     /**
      * The main Query Builder class. Objects initialized from this
@@ -89,7 +89,10 @@ namespace DatabaseFactory {
          * @param string $table  Database table to transact with
          * @param string $config Config class for custom queries
          */
-        public function __construct(private readonly string $table, private readonly string $config)
+        public function __construct(
+			private readonly string $table,
+			private readonly Contracts\BaseConfigInterface $config
+        )
         {
             // connection string
             $this->connection = Facades\DB::connection();
@@ -121,7 +124,7 @@ namespace DatabaseFactory {
             }
 
             // if it does, let's make it the current module
-            $currentModule = $this->modules[$module] = (new $this->config())->modules()[$module];
+            $currentModule = $this->modules[$module] = $this->config->modules()[$module];
 
             // then, we'll see if that module extends the base builder
             if (!Helpers\Cls::extends($currentModule, Modules\BaseBuilder::class)) {
