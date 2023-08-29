@@ -44,6 +44,18 @@ namespace DatabaseFactory\Facades {
             return Connect::connection();
         }
 
+	    /**
+	     * Allows for the execution of raw SQL
+	     *
+	     * @param string $sql
+	     *
+	     * @return array|false
+	     */
+	    public static function query(string $sql): array|false
+	    {
+		    return Connect::connection()->query(trim($sql))->fetchAll(\PDO::FETCH_ASSOC);
+		}
+
         /**
          * Returns a query builder instance
          *
