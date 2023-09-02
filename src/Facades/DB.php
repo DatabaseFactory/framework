@@ -2,14 +2,12 @@
 
 namespace DatabaseFactory\Facades {
 
-    use DatabaseFactory\Config;
-    use DatabaseFactory\Connect;
-    use DatabaseFactory\Helpers;
-    use DatabaseFactory\Builder;
-    use DatabaseFactory\Contracts;
-    use DatabaseFactory\Exceptions;
+	use DatabaseFactory\Contracts;
+	use DatabaseFactory\Connect;
+	use DatabaseFactory\Builder;
+	use DatabaseFactory\Config;
 
-    /**
+	/**
      * The main entry point for Database Factory. This class
      * gives access to the query builder and the current PDO
      * connection
@@ -64,10 +62,10 @@ namespace DatabaseFactory\Facades {
          *
          * @return \DatabaseFactory\Builder
          */
-        public static function table(string $table, Contracts\BaseConfigInterface $config): Builder
+        public static function table(string $table, Contracts\BaseConfigInterface $config = null): Builder
         {
             // if validation passes, return a new query builder instance
-            return (new Builder($table, $config));
+            return (new Builder($table, $config ?? new Config()));
         }
     }
 }

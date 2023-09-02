@@ -3,21 +3,22 @@
 use DatabaseFactory\Contracts;
 use DatabaseFactory\Facades;
 use DatabaseFactory\Builder;
-use DatabaseFactory\Config;
+use Faker\Generator;
+use Faker\Factory;
 
 // If the function doesn't exist, let's create it!
 if (!function_exists('db_factory')) {
 	/**
 	 * Returns a database factory instance
 	 *
-	 * @param string                        $table
-	 * @param Contracts\BaseConfigInterface $config
+	 * @param string                             $table
+	 * @param Contracts\BaseConfigInterface|null $config
 	 *
 	 * @return Builder
 	 */
 	function db_factory(string $table, Contracts\BaseConfigInterface $config = null): Builder
 	{
-		return Facades\DB::table($table, $config ?? new Config());
+		return Facades\DB::table($table, $config);
 	}
 }
 
@@ -30,8 +31,22 @@ if (!function_exists('dump')) {
 	 *
 	 * @return void
 	 */
-	function dump($data): void
+	function dump(...$data): void
 	{
 		Facades\Debug::dump($data);
+	}
+}
+
+// If the function doesn't exist, let's create it!
+if ( ! function_exists('fake')) {
+	/**
+	 * Returns a faker generator instance
+	 *
+	 * @return Generator
+	 */
+	function fake(): Generator
+	{
+		// use the factory to create a Faker\Generator instance
+		return Factory::create();
 	}
 }

@@ -28,10 +28,15 @@ namespace DatabaseFactory\ORM {
          */
         public static function table(): string
         {
+			$stripped = Helpers\Cls::stripNamespace(static::class);
+			$snaked = Helpers\Str::toSnakeCase($stripped);
+
+			if (str_contains($snaked, '_')) {
+				return $snaked;
+			}
+
             return static::$table ?? Helpers\Str::lower(
-                Helpers\Str::plural(
-                    Helpers\Cls::stripNamespace(static::class)
-                )
+                Helpers\Str::plural($stripped)
             );
         }
     }
