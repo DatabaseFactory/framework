@@ -2,7 +2,7 @@
 
 namespace DatabaseFactory\Modules\MySQL {
 
-    trait Transact
+    class Transact
     {
         public function transact(): void
         {

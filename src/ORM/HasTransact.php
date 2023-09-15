@@ -2,34 +2,38 @@
 
 namespace DatabaseFactory\ORM {
     use DatabaseFactory\Builder;
-    use DatabaseFactory\Facades;
+	use DatabaseFactory\Exceptions\TransactionException;
+	use DatabaseFactory\Facades;
 
     trait HasTransact
     {
-        public static function transact(callable $callback): Builder
-        {
-            self::begin(static function () use ($callback) {
-                $callback(Facades\DB::table(static::table()));
-                self::commit();
-            });
 
-            return Facades\DB::table(static::table());
+		public static Builder $builder;
+
+        public static function transact(callable $callback)
+        {
+			self::$builder = Facades\DB::table(static::table());
+	        Facades\DB::connection()->beginTransaction();
+	        $callback(self::$builder);
+	        Facades\DB::connection()->commit();
+
+			return new self();
         }
 
-        public static function rollback(): bool
-        {
-            return Facades\DB::connection()->rollback();
-        }
+	    public function then(callable $callback)
+	    {
+		    $callback(self::$builder);
+			return $this;
+		}
 
-        private static function begin(callable $callback): void
-        {
-            Facades\DB::connection()->beginTransaction();
-            $callback();
-        }
+	    public function stop(callable $callback)
+	    {
+		    $callback(self::$builder);
+		}
 
-        private static function commit(): bool
-        {
-            return Facades\DB::connection()->commit();
-        }
+	    public function error(callable $callback)
+	    {
+		    $callback(new TransactionException());
+		}
     }
 }

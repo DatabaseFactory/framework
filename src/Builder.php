@@ -203,6 +203,16 @@ namespace DatabaseFactory {
         }
 
         /**
+         * Returns the JSON string for the results
+         *
+         * @return string
+         */
+        public function toJSON(): string
+        {
+            return json_encode($this->get(), JSON_THROW_ON_ERROR|JSON_PRETTY_PRINT);
+        }
+
+        /**
          * Close the PDO connection
          *
          * @link https://www.php.net/manual/en/pdo.connections.php
