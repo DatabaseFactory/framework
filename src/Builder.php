@@ -209,7 +209,7 @@ namespace DatabaseFactory {
          */
         public function toJSON(): string
         {
-            return json_encode($this->get(), JSON_THROW_ON_ERROR|JSON_PRETTY_PRINT);
+            return json_encode($this->get(), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
         }
 
         /**
