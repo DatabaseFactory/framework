@@ -175,7 +175,7 @@ namespace DatabaseFactory {
          */
         private function prepare(string $query): \PDOStatement|false
         {
-            return $this->connection->prepare(trim($query));
+            return $this->connection->prepare(Helpers\Str::trim($query));
         }
 
         /**
