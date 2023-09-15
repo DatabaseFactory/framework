@@ -6,7 +6,7 @@
 
 Please take note that this project is a proof of concept. I am toying with the idea of building a
 versatile Query Builder and ORM that fits the basic needs of small applications. It is not production
-ready, if it will be. We'll see where it, and how goes. If it develops into something really cool and
+ready, if it will be. We'll see where, and how it goes. If it develops into something really cool and
 useful, that'd be awesome!
 
 | Travis                                                                                                                                                      | API Docs                                                  | Wiki Pages                                                     |
