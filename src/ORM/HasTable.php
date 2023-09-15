@@ -25,19 +25,17 @@ namespace DatabaseFactory\ORM {
          * name
          *
          * @return string
+         *
+         * @throws \ReflectionException
          */
         public static function table(): string
         {
-			$stripped = Helpers\Cls::stripNamespace(static::class);
-			$snaked = Helpers\Str::toSnakeCase($stripped);
+            $stripped = Helpers\Cls::stripNamespace(static::class);
+            $snaked = Helpers\Str::snakeCase($stripped);
 
-			if (str_contains($snaked, '_')) {
-				return $snaked;
-			}
-
-            return static::$table ?? Helpers\Str::lower(
-                Helpers\Str::plural($stripped)
-            );
+            return !str_contains($snaked, '_')
+                ? static::$table ?? Helpers\Str::lower(Helpers\Str::plural($stripped))
+                : $snaked;
         }
     }
 }

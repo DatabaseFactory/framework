@@ -2,12 +2,12 @@
 
 namespace DatabaseFactory\Facades {
 
-	use DatabaseFactory\Contracts;
-	use DatabaseFactory\Connect;
-	use DatabaseFactory\Builder;
-	use DatabaseFactory\Config;
+    use DatabaseFactory\Contracts;
+    use DatabaseFactory\Connect;
+    use DatabaseFactory\Builder;
+    use DatabaseFactory\Config;
 
-	/**
+    /**
      * The main entry point for Database Factory. This class
      * gives access to the query builder and the current PDO
      * connection
@@ -42,17 +42,17 @@ namespace DatabaseFactory\Facades {
             return Connect::connection();
         }
 
-	    /**
-	     * Allows for the execution of raw SQL
-	     *
-	     * @param string $sql
-	     *
-	     * @return array|false
-	     */
-	    public static function query(string $sql): array|false
-	    {
-		    return Connect::connection()->query(trim($sql))->fetchAll(\PDO::FETCH_ASSOC);
-		}
+        /**
+         * Allows for the execution of raw SQL
+         *
+         * @param string $sql
+         *
+         * @return array|false
+         */
+        public static function query(string $sql): array|false
+        {
+            return Connect::connection()->query(trim($sql))->fetchAll(\PDO::FETCH_ASSOC);
+        }
 
         /**
          * Returns a query builder instance

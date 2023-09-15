@@ -2,9 +2,6 @@
 
 namespace DatabaseFactory {
 
-	use DatabaseFactory\Facades;
-	use DatabaseFactory\ORM;
-
     /**
      * The base entity class
      *
@@ -19,9 +16,9 @@ namespace DatabaseFactory {
     class Entity
     {
         // ORM Plugins
-	    use ORM\HasQuery;
-	    use ORM\HasTable;
-	    use ORM\HasSave;
+        use ORM\HasQuery;
+        use ORM\HasTable;
+        use ORM\HasSave;
 
         /**
          * Constructor

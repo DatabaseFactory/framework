@@ -22,9 +22,7 @@ namespace DatabaseFactory\Modules\MySQL {
          */
         public function statement(string $table, ...$params): string
         {
-            return
-                self::select($params[0] ? : '*') .
-                self::from($table);
+            return self::select($params[0] ? : '*') . self::from($table);
         }
     }
 }

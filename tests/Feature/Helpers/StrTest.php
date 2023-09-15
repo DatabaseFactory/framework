@@ -1,11 +1,9 @@
 <?php
 
 namespace Tests\Feature\Helpers {
-
     use DatabaseFactory\Helpers;
-    use Tests\TestCase;
 
-    class StrTest extends TestCase
+    class StrTest extends \Tests\TestCase
     {
     
         public function testTransformStringToSingularForm(): void
@@ -49,6 +47,14 @@ namespace Tests\Feature\Helpers {
             $this->expected = 'cars';
             $this->assertEquals($this->modified, $this->expected);
         }
+
+	    public function testConvertStringToSnakeCase(): void
+	    {
+		    $this->original = 'Some cars are very fast';
+		    $this->modified = Helpers\Str::snakeCase($this->original);
+		    $this->expected = 'some_cars_are_very_fast';
+		    $this->assertEquals($this->modified, $this->expected);
+	    }
     
         public function testConvertStringToUppercase(): void
         {
@@ -63,6 +69,14 @@ namespace Tests\Feature\Helpers {
             $this->original = 'Some cars are very fast';
             $this->modified = Helpers\Str::slug($this->original);
             $this->expected = 'some-cars-are-very-fast';
+            $this->assertEquals($this->modified, $this->expected);
+        }
+
+        public function testConvertStringToDotNotation(): void
+        {
+            $this->original = 'Some cars are very fast';
+            $this->modified = Helpers\Str::dot($this->original);
+            $this->expected = 'some.cars.are.very.fast';
             $this->assertEquals($this->modified, $this->expected);
         }
     }
