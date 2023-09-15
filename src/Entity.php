@@ -25,6 +25,8 @@ namespace DatabaseFactory {
          *
          * @param int|null $id Pass an ID to update a record
          */
-        public function __construct(private ?int $id = null) {}
+        public function __construct(private ?int $id = null)
+        {
+        }
     }
 }

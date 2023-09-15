@@ -2,11 +2,6 @@
 
 namespace DatabaseFactory {
 
-    use DatabaseFactory\Exceptions;
-    use DatabaseFactory\Contracts;
-    use DatabaseFactory\Helpers;
-    use DatabaseFactory\Facades;
-
     /**
      * The main Query Builder class. Objects initialized from this
      * class are responsible for building queries and handling the
@@ -109,6 +104,8 @@ namespace DatabaseFactory {
          * @return $this
          *
          * @throws \ReflectionException
+         * @link https://www.php.net/manual/en/language.oop5.overloading.php#object.call
+         *
          */
         public function __call(string $module = null, mixed $arguments = null): Builder
         {
@@ -151,6 +148,8 @@ namespace DatabaseFactory {
          * @param ?array $params An array of params to bind to the
          *                       query [optional]
          *
+         * @see \DatabaseFactory\Builder::prepare()
+         *
          * @return \PDOStatement
          */
         public function execute(array $params = null): \PDOStatement
@@ -169,18 +168,22 @@ namespace DatabaseFactory {
          * Generates a prepared PDO statement using a trimmed
          * query string
          *
+         * @link https://www.php.net/manual/en/pdo.prepare.php
+         *
          * @param string $query
          *
          * @return \PDOStatement|false
          */
         private function prepare(string $query): \PDOStatement|false
         {
-            return $this->connection->prepare(trim($query));
+            return $this->connection->prepare(Helpers\Str::trim($query));
         }
 
         /**
          * Return the results or an empty array if $query is an
          * empty string [default value]
+         *
+         * @link https://www.php.net/manual/en/pdostatement.fetchall.php
          *
          * @return array|null
          */
@@ -196,7 +199,7 @@ namespace DatabaseFactory {
          */
         public function toSQL(): string
         {
-            return Helpers\Str::trim($this->query);
+            return $this->query;
         }
 
         /**
@@ -211,6 +214,8 @@ namespace DatabaseFactory {
 
         /**
          * Destructor
+         *
+         * @link https://www.php.net/manual/en/function.unset.php
          *
          * @see \DatabaseFactory\Builder::close()
          */
