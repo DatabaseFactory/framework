@@ -2,10 +2,10 @@
 
 namespace DatabaseFactory {
 
-	use DatabaseFactory\Exceptions;
-	use DatabaseFactory\Contracts;
-	use DatabaseFactory\Helpers;
-	use DatabaseFactory\Facades;
+    use DatabaseFactory\Exceptions;
+    use DatabaseFactory\Contracts;
+    use DatabaseFactory\Helpers;
+    use DatabaseFactory\Facades;
 
     /**
      * The main Query Builder class. Objects initialized from this
@@ -21,6 +21,7 @@ namespace DatabaseFactory {
      *
      * @method join(string $table, array $on, string $columns = '*'): self
      * @method where(string $key, string $is, mixed $value): self
+     * @method transact(mixed $commit, callable $callback): self
      * @method whereNot(string $column, mixed $value): self
      * @method andLike(string $column, mixed $value): self
      * @method notLike(string $column, mixed $value): self
@@ -68,9 +69,6 @@ namespace DatabaseFactory {
             'orderBy'  => null,
             'andLike'  => null,
             'notLike'  => null,
-            'update'   => null,
-            'delete'   => null,
-            'insert'   => null,
             'offset'   => null,
             'select'   => null,
             'orLike'   => null,
@@ -90,10 +88,9 @@ namespace DatabaseFactory {
          * @param string $config Config class for custom queries
          */
         public function __construct(
-			private readonly string $table,
-			private readonly Contracts\BaseConfigInterface $config
-        )
-        {
+            private readonly string $table,
+            private readonly Contracts\BaseConfigInterface $config
+        ) {
             // connection string
             $this->connection = Facades\DB::connection();
         }
@@ -141,7 +138,7 @@ namespace DatabaseFactory {
             }
 
             // if validation passes, we need to generate the query returned and assign
-	        // it to $query for execution
+            // it to $query for execution
             $this->query .= (new $currentModule())->statement($this->table, ...$arguments);
 
             // allow for method chaining of queries
@@ -190,6 +187,16 @@ namespace DatabaseFactory {
         public function get(): ?array
         {
             return $this->query !== '' ? $this->execute()->fetchAll(\PDO::FETCH_ASSOC) : [];
+        }
+
+        /**
+         * Returns the SQL string for the query
+         *
+         * @return string
+         */
+        public function toSQL(): string
+        {
+            return Helpers\Str::trim($this->query);
         }
 
         /**

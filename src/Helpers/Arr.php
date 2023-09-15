@@ -40,5 +40,17 @@ namespace DatabaseFactory\Helpers {
         {
             return array_key_exists($key, $array);
         }
+
+        /**
+         * Pulls a random element from an array
+         *
+         * @param array $array
+         *
+         * @return string
+         */
+        public static function random(array $array): string
+        {
+            return $array[array_rand($array)];
+        }
     }
 }

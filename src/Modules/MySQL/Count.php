@@ -23,9 +23,7 @@ namespace DatabaseFactory\Modules\MySQL {
         public function statement(string $table, ...$params): string
         {
             return
-                self::select($params[0] ?? '*') .
-                self::count() .
-                self::from($table);
+                self::select($params[0] ?? '*') . self::count() . self::from($table);
         }
     }
 }

@@ -18,6 +18,10 @@ namespace DatabaseFactory\Modules {
     class BaseBuilder implements Contracts\BaseBuilderInterface
     {
         // @todo - reimplement as non-constants (props as an array, perhaps?)
+        protected static array $statements = [
+            'COUNT' => 'COUNT',
+            'WHERE' => 'WHERE',
+        ];
         protected const COUNT = 'COUNT';
         protected const WHERE = ' WHERE ';
         protected const LIKE = ' LIKE ';
